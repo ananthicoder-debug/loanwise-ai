@@ -1,8 +1,8 @@
 @echo off
-title LoanWise AI — Frontend Server
+title LoanWise AI ??? Frontend Server
 echo.
 echo ============================================================
-echo   LoanWise AI — Frontend Server
+echo   LoanWise AI ??? Frontend Server
 echo   (Port 5500/5501 reserved by Oracle on this machine)
 echo ============================================================
 echo.

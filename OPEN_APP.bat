@@ -1,8 +1,8 @@
 @echo off
-title LoanWise AI — Open in Browser
+title LoanWise AI ??? Open in Browser
 echo.
 echo ============================================================
-echo   LoanWise AI — Opening Application
+echo   LoanWise AI ??? Opening Application
 echo ============================================================
 echo.
 

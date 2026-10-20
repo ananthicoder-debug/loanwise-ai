@@ -1,8 +1,8 @@
 @echo off
-title LoanWise AI — Start MongoDB
+title LoanWise AI ??? Start MongoDB
 echo.
 echo ============================================================
-echo   LoanWise AI — Starting MongoDB
+echo   LoanWise AI ??? Starting MongoDB
 echo ============================================================
 echo.
 

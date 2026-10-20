@@ -1,8 +1,8 @@
 @echo off
-title LoanWise AI — Switch to Local MongoDB
+title LoanWise AI ??? Switch to Local MongoDB
 echo.
 echo ============================================================
-echo   LoanWise AI — Switching to Local MongoDB
+echo   LoanWise AI ??? Switching to Local MongoDB
 echo ============================================================
 echo.
 

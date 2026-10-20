@@ -1,4 +1,4 @@
-# ─── Python ───────────────────────────────────────────────────
+# ── Python ────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *.pyo
@@ -8,34 +8,33 @@ venv/
 .venv/
 *.egg-info/
 
-# ─── Environment files (NEVER commit real credentials) ────────
-.env
-.env.production
-.env.local
-.env.backup
-!.env.example
+# ── Credentials — NEVER commit ────────────────────────────────
+backend/.env
+backend/.env.production
+backend/.env.local
+backend/.env.backup
+!backend/.env.example
 
-# ─── Uploaded user documents ──────────────────────────────────
-LoanAssist-AI/backend/uploads/
+# ── Uploaded user files ───────────────────────────────────────
+backend/uploads/
 
-# ─── MongoDB data directory (local) ──────────────────────────
+# ── Local MongoDB data ────────────────────────────────────────
 C:/data/
-data/db/
 
-# ─── OS ───────────────────────────────────────────────────────
+# ── OS files ──────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# ─── IDE ──────────────────────────────────────────────────────
+# ── IDE ───────────────────────────────────────────────────────
 .vscode/settings.json
 .idea/
 
-# ─── Logs ─────────────────────────────────────────────────────
+# ── Logs ──────────────────────────────────────────────────────
 *.log
 mongod.log
 
-# ─── Test / temp files ────────────────────────────────────────
-test_atlas.py
-verify_connection.py
-test_new_modules.py
+# ── Temp / test files ─────────────────────────────────────────
+backend/test_atlas.py
+backend/verify_connection.py
+backend/test_new_modules.py

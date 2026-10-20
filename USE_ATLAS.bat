@@ -1,8 +1,8 @@
 @echo off
-title LoanWise AI — Switch to MongoDB Atlas
+title LoanWise AI ??? Switch to MongoDB Atlas
 echo.
 echo ============================================================
-echo   LoanWise AI — Switching to MongoDB Atlas
+echo   LoanWise AI ??? Switching to MongoDB Atlas
 echo   Cluster: cluster0.ckt9xiq.mongodb.net
 echo ============================================================
 echo.
