@@ -204,6 +204,14 @@ def main():
     print("Database: loan_ai_system")
     print("=" * 60)
 
+    # Verify connection before doing anything
+    from database.mongodb import check_connection, _conn_label
+    if not check_connection():
+        print(f"[ERROR] Cannot connect to {_conn_label}.")
+        print("  For Atlas: ensure IP is whitelisted and credentials are correct.")
+        print("  Skipping seed — app will start without demo data.")
+        return
+
     seed_lenders()
     seed_products()
     seed_users()

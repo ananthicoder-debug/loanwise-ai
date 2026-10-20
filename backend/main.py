@@ -65,8 +65,41 @@ def on_startup():
     if check_connection():
         create_indexes()
         print(f"[LoanWise AI] Connected to {_conn_label} — database: {DATABASE_NAME}")
+        # Sync any model metrics that were saved to JSON during build phase
+        # (Atlas is unreachable during Render build, so metrics are saved to files first)
+        _sync_model_metrics_to_db()
     else:
         print(f"[LoanWise AI] WARNING: {_conn_label} not reachable. Check your connection and restart.")
+
+
+def _sync_model_metrics_to_db():
+    """
+    At app startup (not build), push any JSON-saved model metrics to MongoDB.
+    This handles the case where Atlas was unreachable during Render build phase.
+    """
+    import json
+    from pathlib import Path
+    from database.mongodb import collections
+
+    reports_dir = Path(__file__).parent / "data" / "reports"
+    synced = 0
+    for json_file in reports_dir.glob("metrics_*.json"):
+        try:
+            with open(json_file) as f:
+                doc = json.load(f)
+            if "key" in doc and "model_name" in doc:
+                # Remove non-serialisable fields then upsert
+                doc.pop("updated_at", None)
+                from datetime import datetime, timezone
+                doc["updated_at"] = datetime.now(timezone.utc)
+                collections["system_metadata"].replace_one(
+                    {"key": doc["key"]}, doc, upsert=True
+                )
+                synced += 1
+        except Exception:
+            pass
+    if synced:
+        print(f"[LoanWise AI] Synced {synced} model metric record(s) from JSON to MongoDB.")
 
 
 @app.get("/api/health")
