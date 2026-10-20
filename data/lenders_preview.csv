@@ -1,0 +1,13 @@
+Lender_ID,Lender_Name,Lender_Type,Headquarters_City,State,Official_Website,Verification_Status,Dataset_Type
+L001,State Bank of India,Bank,Mumbai,Maharashtra,https://sbi.co.in,Verified,Verified_Product_Catalogue
+L002,HDFC Bank,Bank,Mumbai,Maharashtra,https://www.hdfcbank.com,Verified,Verified_Product_Catalogue
+L003,ICICI Bank,Bank,Mumbai,Maharashtra,https://www.icicibank.com,Verified,Verified_Product_Catalogue
+L004,Axis Bank,Bank,Mumbai,Maharashtra,https://www.axisbank.com,Verified,Verified_Product_Catalogue
+L005,Punjab National Bank,Bank,New Delhi,Delhi,https://www.pnbindia.in,Verified,Verified_Product_Catalogue
+L006,Bank of Baroda,Bank,Vadodara,Gujarat,https://www.bankofbaroda.in,Verified,Verified_Product_Catalogue
+L007,Canara Bank,Bank,Bengaluru,Karnataka,https://www.canarabank.com,Verified,Verified_Product_Catalogue
+L008,Kotak Mahindra Bank,Bank,Mumbai,Maharashtra,https://www.kotak.com,Verified,Verified_Product_Catalogue
+L009,IDFC FIRST Bank,Bank,Mumbai,Maharashtra,https://www.idfcfirstbank.com,Verified,Verified_Product_Catalogue
+L010,IndusInd Bank,Bank,Mumbai,Maharashtra,https://indusind.com,Verified,Verified_Product_Catalogue
+L011,Bajaj Finance,NBFC,Pune,Maharashtra,https://www.bajajfinserv.in,Verified,Verified_Product_Catalogue
+L012,Tata Capital,NBFC,Mumbai,Maharashtra,https://www.tatacapital.com,Verified,Verified_Product_Catalogue

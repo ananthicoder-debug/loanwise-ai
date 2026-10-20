@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Loan Assessment Report — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ── Assessment-specific styles ─────────────────────────────── */
+.assess-section { background:#fff; border-radius:12px; padding:22px 26px; box-shadow:0 2px 10px rgba(0,0,0,0.06); margin-bottom:20px; }
+.assess-section-title { font-size:1.02rem; font-weight:700; color:var(--primary); border-bottom:2px solid var(--lavender); padding-bottom:8px; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.verdict-badge { display:inline-block; padding:10px 22px; border-radius:30px; font-size:1.1rem; font-weight:800; letter-spacing:.3px; }
+.verdict-eligible   { background:#DCFCE7; color:#15803D; }
+.verdict-not-eligible { background:#FEE2E2; color:#DC2626; }
+.verdict-manageable { background:#DBEAFE; color:#1D4ED8; }
+.verdict-not-manageable { background:#FEF3C7; color:#92400E; }
+.calc-box { background:#F8F7FF; border:1px solid #DDD6FE; border-radius:8px; padding:14px 18px; margin-bottom:12px; }
+.calc-box .calc-name { font-weight:700; font-size:.9rem; color:var(--primary); margin-bottom:4px; }
+.calc-box .calc-formula { font-family:monospace; font-size:.85rem; color:#555; background:#EDE9FE; padding:3px 8px; border-radius:4px; display:inline-block; margin-bottom:6px; }
+.calc-box .calc-result { font-size:1.2rem; font-weight:800; color:var(--accent); }
+.factor-row { display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px solid #F3F4F6; }
+.factor-row:last-child { border-bottom:none; }
+.factor-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+.factor-dot.positive { background:#22C55E; }
+.factor-dot.negative { background:#EF4444; }
+.factor-dot.neutral  { background:#6B7280; }
+.factor-dot.info     { background:#3B82F6; }
+.obs-item { display:flex; gap:10px; padding:8px 0; border-bottom:1px solid #F9FAFB; }
+.obs-item:last-child { border-bottom:none; }
+.obs-icon { font-size:1.1rem; flex-shrink:0; }
+.obs-text { font-size:.9rem; line-height:1.55; }
+.strength-bar-wrap { display:inline-block; width:80px; height:6px; background:#E5E7EB; border-radius:3px; vertical-align:middle; margin-left:6px; }
+.strength-bar { height:6px; border-radius:3px; background:var(--primary); }
+.what-if-box { background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:18px 20px; }
+.what-if-box.warning { background:#FFF7ED; border-color:#FED7AA; }
+.what-if-box.danger  { background:#FFF1F2; border-color:#FECDD3; }
+.step-item { display:flex; gap:10px; align-items:flex-start; padding:6px 0; }
+.step-num { background:var(--primary); color:#fff; border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; font-size:.75rem; font-weight:700; flex-shrink:0; }
+.disclaimer-box { background:#FFF7ED; border:1px solid #FED7AA; border-radius:8px; padding:14px 18px; font-size:.82rem; color:#92400E; }
+.input-feature-table td { font-size:.88rem; padding:6px 10px; }
+.product-match-card { border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+.product-match-card.recommended { border-color:#22C55E; background:#F0FDF4; }
+.match-score-badge { background:var(--primary); color:#fff; border-radius:20px; padding:3px 10px; font-size:.78rem; font-weight:700; }
+.collapse-btn { background:none; border:none; color:var(--primary); font-size:.88rem; font-weight:600; cursor:pointer; padding:0; }
+.collapse-btn:hover { text-decoration:underline; }
+.print-btn { background:none; border:1px solid var(--primary); color:var(--primary); border-radius:6px; padding:6px 16px; font-size:.88rem; cursor:pointer; }
+.print-btn:hover { background:var(--lavender); }
+</style>
+</head>
+<body>
+<div class="lw-layout">
+  <div id="sidebarOverlay" class="lw-sidebar-overlay"></div>
+  <aside id="lwSidebar" class="lw-sidebar"></aside>
+  <div class="lw-main">
+    <header id="lwTopbar" class="lw-topbar"></header>
+    <main class="lw-page-content" id="reportMain">
+
+      <!-- breadcrumb + actions -->
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+        <div class="lw-breadcrumb"><a href="dashboard.html">Dashboard</a> / <a href="applications.html">Applications</a> / Assessment Report</div>
+        <div class="d-flex gap-2">
+          <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+          <button class="btn btn-sm btn-la-outline" id="whatIfBtn">🔄 What-If</button>
+        </div>
+      </div>
+
+      <h1 class="lw-page-title">LoanWise AI — Complete Loan Assessment Report</h1>
+      <p class="lw-page-subtitle">Comprehensive eligibility and affordability analysis with model explanations.</p>
+
+      <div class="model-ribbon mb-4">🤖 AI-Generated Assessment — Model outputs are estimates. Final eligibility and approval are determined by the lender.</div>
+
+      <div id="assessAlert"></div>
+      <div id="reportContent">
+        <div class="text-center py-5 text-muted">
+          <span class="spinner-border spinner-la me-2"></span> Loading assessment…
+        </div>
+      </div>
+
+    </main>
+    <footer class="la-footer text-center"><div class="container"><p class="mb-0 small">LoanWise AI — All model outputs are estimates. Verify terms directly with your lender.</p></div></footer>
+  </div>
+</div>
+
+<!-- What-If Modal -->
+<div class="modal fade" id="whatIfModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">🔄 What-If Scenario Analysis</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p class="small text-muted mb-3">Adjust loan parameters to see the impact. Your saved application will not be changed.</p>
+        <div class="mb-3">
+          <label class="form-label">Loan Amount (₹)</label>
+          <input type="number" class="form-control" id="wiAmount" placeholder="e.g. 400000">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Interest Rate (% p.a.)</label>
+          <input type="number" class="form-control" id="wiRate" step="0.01" placeholder="e.g. 12.5">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Tenure (months)</label>
+          <input type="number" class="form-control" id="wiTenure" placeholder="e.g. 48">
+        </div>
+        <div id="wiAlert"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-la-outline" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-la-primary" id="runWhatIfBtn">Recalculate Scenario</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/assessment.js"></script>
+<script>$(function(){ initAssessmentPage(); });</script>
+</body>
+</html>

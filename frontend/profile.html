@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Profile — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="lw-layout">
+  <div id="sidebarOverlay" class="lw-sidebar-overlay"></div>
+  <aside id="lwSidebar" class="lw-sidebar"></aside>
+  <div class="lw-main">
+    <header id="lwTopbar" class="lw-topbar"></header>
+    <main class="lw-page-content">
+      <div class="lw-breadcrumb"><a href="dashboard.html">Dashboard</a> / My Profile</div>
+      <h1 class="lw-page-title">My Profile</h1>
+      <p class="lw-page-subtitle">Keep your personal and financial information up to date for accurate eligibility estimates.</p>
+      <div id="profileAlert"></div>
+
+      <!-- Tabs -->
+      <div class="lw-tab-nav">
+        <button class="tab-btn active" data-tab="personal">👤 Personal Information</button>
+        <button class="tab-btn" data-tab="employment">💼 Employment</button>
+        <button class="tab-btn" data-tab="financial">💰 Financial Profile</button>
+        <button class="tab-btn" data-tab="credit">📊 Credit Profile</button>
+      </div>
+
+      <!-- Personal Tab -->
+      <div class="lw-tab-pane active" id="tab-personal">
+        <div class="la-card">
+          <div class="la-card-header">Personal Information</div>
+          <form id="personalForm">
+            <div class="row g-3">
+              <div class="col-md-6"><label class="form-label">Full Name</label><input type="text" class="form-control" id="fullName"></div>
+              <div class="col-md-6"><label class="form-label">Email Address</label><input type="email" class="form-control" id="emailDisplay" disabled></div>
+              <div class="col-md-4"><label class="form-label">Phone</label><input type="tel" class="form-control" id="phone" maxlength="10"></div>
+              <div class="col-md-4"><label class="form-label">Date of Birth</label><input type="date" class="form-control" id="dob"></div>
+              <div class="col-md-4"><label class="form-label">Gender</label>
+                <select class="form-select" id="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select>
+              </div>
+              <div class="col-12"><label class="form-label">Street Address</label><input type="text" class="form-control" id="street"></div>
+              <div class="col-md-4"><label class="form-label">City</label><input type="text" class="form-control" id="city"></div>
+              <div class="col-md-4"><label class="form-label">State</label>
+                <select class="form-select" id="state">
+                  <option value="">Select State</option>
+                  <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option><option>Chhattisgarh</option>
+                  <option>Delhi</option><option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option>
+                  <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option>
+                  <option>Maharashtra</option><option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+                  <option>Tamil Nadu</option><option>Telangana</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
+                  <option>West Bengal</option><option>Other</option>
+                </select>
+              </div>
+              <div class="col-md-4"><label class="form-label">Pincode</label><input type="text" class="form-control" id="pincode" maxlength="6"></div>
+              <div class="col-12"><button type="submit" class="btn btn-la-primary px-4">Save Personal Info</button></div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Employment Tab -->
+      <div class="lw-tab-pane" id="tab-employment">
+        <div class="la-card">
+          <div class="la-card-header">Employment Information</div>
+          <form id="employmentForm">
+            <div class="row g-3">
+              <div class="col-md-6"><label class="form-label">Employment Type</label>
+                <select class="form-select" id="empType">
+                  <option value="Salaried">Salaried</option><option value="Self-Employed">Self-Employed</option>
+                  <option value="Business Owner">Business Owner</option><option value="Government Employee">Government Employee</option>
+                  <option value="PSU Employee">PSU Employee</option><option value="Defence Employee">Defence Employee</option>
+                  <option value="Professional">Professional (Doctor/CA/Lawyer)</option><option value="Private Employee">Private Employee</option>
+                </select>
+              </div>
+              <div class="col-md-6"><label class="form-label">Employer Category</label>
+                <select class="form-select" id="empCategory">
+                  <option value="Private">Private</option><option value="Government">Government</option>
+                  <option value="IT/Tech">IT/Tech</option><option value="PSU">PSU</option>
+                  <option value="Self">Self-employed/Business</option><option value="Defence">Defence</option>
+                </select>
+              </div>
+              <div class="col-md-6"><label class="form-label">Years of Employment</label><input type="number" class="form-control" id="yearsEmp" step="0.5" min="0"></div>
+              <div class="col-md-6"><label class="form-label">Education</label>
+                <select class="form-select" id="education">
+                  <option value="Post Graduate">Post Graduate</option><option value="Graduate">Graduate</option>
+                  <option value="12th">12th Pass</option><option value="10th">10th Pass</option>
+                </select>
+              </div>
+              <div class="col-12"><button type="submit" class="btn btn-la-primary px-4">Save Employment Info</button></div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Financial Tab -->
+      <div class="lw-tab-pane" id="tab-financial">
+        <div class="la-card">
+          <div class="la-card-header">Financial Information</div>
+          <form id="financialForm">
+            <div class="row g-3">
+              <div class="col-md-6"><label class="form-label">Monthly Income (₹)</label><input type="number" class="form-control" id="monthlyIncome" min="0"></div>
+              <div class="col-md-6"><label class="form-label">Annual Income (₹)</label><input type="number" class="form-control" id="annualIncome" min="0"></div>
+              <div class="col-md-6"><label class="form-label">Number of Dependents</label><input type="number" class="form-control" id="dependents" min="0" max="10"></div>
+              <div class="col-md-6"><label class="form-label">Residence Type</label>
+                <select class="form-select" id="residenceType">
+                  <option value="Own">Own</option><option value="Rented">Rented</option><option value="Company Provided">Company Provided</option><option value="Family">Family</option>
+                </select>
+              </div>
+              <div class="col-md-6"><label class="form-label">Existing Loans Count</label><input type="number" class="form-control" id="existingLoans" min="0"></div>
+              <div class="col-md-6"><label class="form-label">Existing Monthly EMI (₹)</label><input type="number" class="form-control" id="existingEmi" min="0"></div>
+              <div class="col-md-6"><label class="form-label">Outstanding Debt (₹)</label><input type="number" class="form-control" id="outstandingDebt" min="0"></div>
+              <div class="col-md-6"><label class="form-label">Credit Card Outstanding (₹)</label><input type="number" class="form-control" id="ccOutstanding" min="0"></div>
+              <div class="col-md-6"><label class="form-label">Coapplicant?</label>
+                <select class="form-select" id="coapplicant"><option value="false">No</option><option value="true">Yes</option></select>
+              </div>
+              <div class="col-md-6"><label class="form-label">Coapplicant Income (₹/month)</label><input type="number" class="form-control" id="coapplicantIncome" min="0"></div>
+              <div class="col-12"><button type="submit" class="btn btn-la-primary px-4">Save Financial Info</button></div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Credit Tab -->
+      <div class="lw-tab-pane" id="tab-credit">
+        <div class="la-card">
+          <div class="la-card-header">Credit & Repayment Profile</div>
+          <form id="creditForm">
+            <div class="row g-3">
+              <div class="col-md-4"><label class="form-label">Age</label><input type="number" class="form-control" id="age" min="18" max="80"></div>
+              <div class="col-md-4"><label class="form-label">CIBIL Score</label><input type="number" class="form-control" id="cibilScore" min="300" max="900" placeholder="300–900"></div>
+              <div class="col-md-4"><label class="form-label">Previous Loans</label><input type="number" class="form-control" id="prevLoans" min="0"></div>
+              <div class="col-md-4"><label class="form-label">Missed Payments</label><input type="number" class="form-control" id="missedPayments" min="0"></div>
+              <div class="col-md-4"><label class="form-label">Late Payments</label><input type="number" class="form-control" id="latePayments" min="0"></div>
+              <div class="col-md-4"><label class="form-label">Avg Days Late</label><input type="number" class="form-control" id="avgDaysLate" min="0" step="0.1"></div>
+              <div class="col-12">
+                <div class="alert alert-info small mb-3">
+                  <strong>Note:</strong> CIBIL score and payment history directly affect AI model eligibility and affordability estimates. Keep this information accurate for best results.
+                </div>
+                <button type="submit" class="btn btn-la-primary px-4">Save Credit Profile</button>
+                <a href="eligible-loans.html" class="btn btn-la-accent ms-2 px-4">✅ Check Eligibility Now</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+    <footer class="la-footer text-center"><div class="container"><p class="mb-0 small">LoanWise AI — Your data is used only for AI model inputs within this application.</p></div></footer>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/profile.js"></script>
+<script>$(function(){ initProfilePage(); });</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-logo text-center mb-1">💜 LoanWise <span>AI</span></div>
+    <p class="text-center text-muted small mb-4">Sign in to your account</p>
+
+    <div id="loginAlert"></div>
+
+    <form id="loginForm">
+      <div class="mb-3">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="loginEmail" placeholder="you@example.com" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="loginPassword" placeholder="Your password" required>
+          <button class="btn btn-outline-secondary" type="button" id="togglePwd">👁</button>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-la-primary w-100 py-2" id="loginBtn">Sign In</button>
+    </form>
+
+    <div class="text-center mt-3 small text-muted">
+      Don't have an account? <a href="register.html" class="text-primary-la fw-bold">Register</a>
+    </div>
+
+    <hr class="my-4">
+    <div class="bg-light rounded p-3 small">
+      <div class="fw-bold mb-2">Demo Credentials</div>
+      <div class="mb-1">🟢 User: <code>anantha@example.com</code> / <code>Demo@123</code></div>
+      <div>🔴 Admin: <code>admin@loanwise.ai</code> / <code>Admin@123</code></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/auth.js"></script>
+<script>$(function(){
+  // Redirect if already logged in
+  if (getToken()) {
+    window.location.href = getRole() === "admin" ? "admin-dashboard.html" : "dashboard.html";
+    return;
+  }
+  initLoginPage();
+});</script>
+</body>
+</html>

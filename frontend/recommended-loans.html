@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Recommended Loans — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="lw-layout">
+  <div id="sidebarOverlay" class="lw-sidebar-overlay"></div>
+  <aside id="lwSidebar" class="lw-sidebar"></aside>
+  <div class="lw-main">
+    <header id="lwTopbar" class="lw-topbar"></header>
+    <main class="lw-page-content">
+      <div class="lw-breadcrumb"><a href="dashboard.html">Dashboard</a> / Recommended Loans</div>
+      <h1 class="lw-page-title">Recommended Loans for Your Financial Situation</h1>
+      <p class="lw-page-subtitle">Products that appear both potentially eligible and financially manageable based on AI model estimates.</p>
+
+      <div class="model-ribbon mb-3">🤖 AI-Powered Recommendation — Verify final terms and eligibility directly with the lender before applying.</div>
+
+      <div id="recAlert"></div>
+      <div id="recContent">
+        <div class="text-center py-5 text-muted"><span class="spinner-border spinner-la me-2"></span> Loading recommendations...</div>
+      </div>
+    </main>
+    <footer class="la-footer text-center"><div class="container"><p class="mb-0 small">LoanWise AI — Recommendations are AI-powered estimates. Always verify with the lender.</p></div></footer>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/recommendations.js"></script>
+<script>$(function(){ initRecommendedLoansPage(); });</script>
+</body>
+</html>

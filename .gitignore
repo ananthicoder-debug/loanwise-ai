@@ -1,0 +1,41 @@
+# ─── Python ───────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+
+# ─── Environment files (NEVER commit real credentials) ────────
+.env
+.env.production
+.env.local
+.env.backup
+!.env.example
+
+# ─── Uploaded user documents ──────────────────────────────────
+LoanAssist-AI/backend/uploads/
+
+# ─── MongoDB data directory (local) ──────────────────────────
+C:/data/
+data/db/
+
+# ─── OS ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── IDE ──────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+
+# ─── Logs ─────────────────────────────────────────────────────
+*.log
+mongod.log
+
+# ─── Test / temp files ────────────────────────────────────────
+test_atlas.py
+verify_connection.py
+test_new_modules.py

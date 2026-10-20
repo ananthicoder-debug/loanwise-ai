@@ -1,0 +1,21 @@
+Historical_Loan_ID,Applicant_ID,Product_ID,Lender_Name,Loan_Category,Loan_Amount,Interest_Rate,Tenure_Months,EMI_Amount,Start_Date,Loan_Status,Outstanding_Amount,Total_Installments,Paid_Installments,Missed_Installments,Late_Installments,Average_Days_Late,Total_Late_Charges,Early_Closure,Repayment_Status,Dataset_Type
+HL0000001,A001132,P017,IDFC FIRST Bank,Personal Loan,162862,17.413938126735008,12,14885.8,2023-09-04,Closed,34248.69,12,12,0,1,12.4,297.72,No,Fair,Synthetic_Historical_Loan_Data
+HL0000002,A002949,P005,HDFC Bank,Personal Loan,3191357,13.20086585936942,12,285344.15,2021-06-05,Closed,725983.54,12,12,1,0,4.7,0.0,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000003,A001979,P019,Bajaj Finance,Consumer Durable Loan,500000,4.390942195075977,48,11377.21,2022-07-14,Closed,106803.62,48,48,0,1,6.9,227.54,No,Fair,Synthetic_Historical_Loan_Data
+HL0000004,A004637,P020,Bajaj Finance,Personal Loan,346011,23.744451425382906,36,13528.62,2023-04-04,Closed,0.0,36,36,1,2,15.8,541.14,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000005,A000196,P014,Canara Bank,Vehicle Loan,616070,9.957149678562438,36,19866.45,2021-04-26,Closed,101131.62,36,36,0,0,2.5,0.0,No,Good,Synthetic_Historical_Loan_Data
+HL0000006,A004969,P007,ICICI Bank,Personal Loan,193381,18.829594347421292,36,7071.93,2021-10-16,Closed,10076.57,36,36,0,0,6.2,0.0,No,Good,Synthetic_Historical_Loan_Data
+HL0000007,A000363,P012,Punjab National Bank,Personal Loan,241093,15.057429445319048,24,11696.37,2023-05-24,Closed,38979.73,24,24,1,0,0.5,0.0,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000008,A000755,P016,Kotak Mahindra Bank,Personal Loan,74566,21.268917492276515,24,3841.48,2021-11-17,Closed,8185.23,24,24,0,1,11.1,76.83,No,Fair,Synthetic_Historical_Loan_Data
+HL0000009,A000760,P006,HDFC Bank,Home Loan,752703,10.494890754036202,84,12689.07,2021-09-28,Overdue,213671.31,84,59,8,4,25.4,1015.13,No,Poor,Synthetic_Historical_Loan_Data
+HL0000010,A003699,P004,State Bank of India,Gold Loan,38309,8.966412060038419,84,615.7,2023-08-23,Overdue,21906.75,84,37,4,2,12.8,24.63,No,Poor,Synthetic_Historical_Loan_Data
+HL0000011,A000478,P010,Axis Bank,Personal Loan,225245,11.545917096631111,84,3921.7,2022-04-30,Overdue,78416.55,84,52,1,4,28.1,313.74,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000012,A001929,P010,Axis Bank,Personal Loan,271655,15.088778106042735,60,6475.32,2022-02-05,Overdue,15232.33,60,55,5,5,34.7,647.53,No,Poor,Synthetic_Historical_Loan_Data
+HL0000013,A001231,P018,Tata Capital,Business Loan,552234,14.447794919545832,24,26631.32,2022-08-13,Closed,92044.79,24,24,0,0,3.1,0.0,No,Good,Synthetic_Historical_Loan_Data
+HL0000014,A003773,P005,HDFC Bank,Personal Loan,122448,16.97151249786146,60,3041.27,2022-08-19,Overdue,15151.99,60,49,1,0,2.9,0.0,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000015,A000412,P001,State Bank of India,Personal Loan,1562707,13.84187534620891,36,53289.68,2023-08-15,Closed,181438.49,36,36,0,3,24.3,3197.38,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000016,A000083,P016,Kotak Mahindra Bank,Personal Loan,341710,17.837128703772468,36,12325.73,2021-08-01,Closed,22227.08,36,36,1,2,12.8,493.03,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000017,A001867,P007,ICICI Bank,Personal Loan,2185486,16.347285382476294,60,53550.89,2022-05-05,Overdue,180540.68,60,52,3,1,10.7,1071.02,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000018,A000095,P002,State Bank of India,Vehicle Loan,245652,9.815742500725978,36,7905.27,2021-02-27,Closed,40747.4,36,36,0,1,7.8,158.11,No,Fair,Synthetic_Historical_Loan_Data
+HL0000019,A002166,P006,HDFC Bank,Home Loan,500000,10.570584460008764,36,16267.87,2022-12-30,Closed,78336.81,36,36,1,2,12.6,650.71,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000020,A004200,P008,ICICI Bank,Vehicle Loan,231765,11.804828771325496,60,5132.66,2024-02-08,Active,117204.03,60,31,0,2,16.9,205.31,No,Fair,Synthetic_Historical_Loan_Data

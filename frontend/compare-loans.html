@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compare Loans — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="lw-layout">
+  <div id="sidebarOverlay" class="lw-sidebar-overlay"></div>
+  <aside id="lwSidebar" class="lw-sidebar"></aside>
+  <div class="lw-main">
+    <header id="lwTopbar" class="lw-topbar"></header>
+    <main class="lw-page-content">
+      <div class="lw-breadcrumb"><a href="dashboard.html">Dashboard</a> / Compare Loans</div>
+      <h1 class="lw-page-title">Compare Loan Products</h1>
+      <p class="lw-page-subtitle">Compare up to 4 loan products side by side. Add products using the Compare button on Eligible Loans or Search pages.</p>
+      <div id="compareAlert"></div>
+      <div class="la-card mb-4" id="compareListBar" style="display:none">
+        <div class="la-card-header">Products in Compare List</div>
+        <div id="compareChips" class="d-flex flex-wrap gap-2 mb-3"></div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-la-primary" id="loadCompareBtn">Load Comparison</button>
+          <button class="btn btn-la-outline" id="clearCompareBtn">Clear All</button>
+        </div>
+      </div>
+      <div id="compareNoItems" class="empty-state">
+        <div class="empty-icon">⚖️</div>
+        <div class="empty-msg">No products in compare list.</div>
+        <div class="empty-sub">Go to <a href="eligible-loans.html">Eligible Loans</a> or <a href="loan-search.html">Loan Search</a> and click "Compare" on any product.</div>
+      </div>
+      <div id="compareTableWrap" style="display:none">
+        <div class="table-responsive">
+          <table class="lw-table compare-table" id="compareTable">
+            <thead id="compareHead"></thead>
+            <tbody id="compareBody"></tbody>
+          </table>
+        </div>
+        <div class="mt-3 small text-muted">⭐ Best value highlighted in green. All EMI values are estimates.</div>
+      </div>
+    </main>
+    <footer class="la-footer text-center"><div class="container"><p class="mb-0 small">LoanWise AI — Comparison for reference only. Actual terms subject to lender approval.</p></div></footer>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/emi.js"></script>
+<script>$(function(){ initCompareLoansPage(); });</script>
+</body>
+</html>

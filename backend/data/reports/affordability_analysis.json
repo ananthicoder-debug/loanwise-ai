@@ -1,0 +1,81 @@
+{
+  "dataset": "affordability_dataset.csv",
+  "source": "data/raw/affordability_dataset.csv",
+  "total_records": 5000,
+  "training_records": 4000,
+  "testing_records": 1000,
+  "target_column": "manageable",
+  "class_distribution": {
+    "manageable": 1123,
+    "not_manageable": 3877
+  },
+  "class_balance_pct": {
+    "manageable": 22.5,
+    "not_manageable": 77.5
+  },
+  "class_imbalance_note": "Dataset is imbalanced (22.5% Manageable). class_weight=balanced used.",
+  "features_used": [
+    "monthly_income",
+    "dependents",
+    "existing_loans",
+    "current_emi",
+    "outstanding_debt",
+    "previous_loans",
+    "missed_payments",
+    "late_payments",
+    "proposed_amount",
+    "proposed_rate",
+    "proposed_tenure",
+    "proposed_emi",
+    "emi_income_ratio"
+  ],
+  "numerical_stats": {
+    "monthly_income": {
+      "min": 2800.0,
+      "max": 143900.0,
+      "mean": 40152.92
+    },
+    "current_emi": {
+      "min": 0.0,
+      "max": 43170.0,
+      "mean": 6958.66
+    },
+    "outstanding_debt": {
+      "min": 0.0,
+      "max": 757600.0,
+      "mean": 120458.7
+    },
+    "proposed_amount": {
+      "min": 19000.0,
+      "max": 2565000.0,
+      "mean": 452730.8
+    },
+    "emi_income_ratio": {
+      "min": 0.0285,
+      "max": 11.6601,
+      "mean": 0.82
+    }
+  },
+  "missing_values": 0,
+  "model_performance": {
+    "algorithm": "LogisticRegression",
+    "accuracy": 0.826,
+    "precision": 0.5726,
+    "recall": 0.8933,
+    "f1_score": 0.6979,
+    "roc_auc": 0.9243,
+    "confusion_matrix": [
+      [
+        625,
+        150
+      ],
+      [
+        24,
+        201
+      ]
+    ]
+  },
+  "feature_importance": {},
+  "disclaimer": "Trained on borrower financial profile data. AI output is an estimate \u2014 not a repayment guarantee.",
+  "generated_at": "2026-10-20T18:14:27.167187"
+}

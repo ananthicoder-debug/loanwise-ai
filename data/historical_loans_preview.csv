@@ -1,0 +1,21 @@
+Historical_Loan_ID,Applicant_ID,Product_ID,Lender_Name,Loan_Category,Loan_Amount,Interest_Rate,Tenure_Months,EMI_Amount,Start_Date,Loan_Status,Outstanding_Amount,Total_Installments,Paid_Installments,Missed_Installments,Late_Installments,Average_Days_Late,Total_Late_Charges,Early_Closure,Repayment_Status,Dataset_Type
+HL0000001,APP003190,L001_HOM_204,State Bank of India,Home Loan,413246,11.04,12,36531,2021-01-01,Settled,11405,12,1,1,0,9,1657,No,Good,Synthetic_Historical_Loan_Data
+HL0000002,APP003126,L009_CON_512,IDFC FIRST Bank,Consumer Durable Loan,866723,21.55,57,24418,2020-03-20,Closed,0,57,46,4,0,11,4010,No,Fair,Synthetic_Historical_Loan_Data
+HL0000003,APP001338,L004_CON_710,Axis Bank,Consumer Durable Loan,1000000,12.08,12,88886,2026-08-11,Closed,0,12,1,4,3,11,7640,No,Excellent,Synthetic_Historical_Loan_Data
+HL0000004,APP000813,L012_PER_655,Tata Capital,Personal Loan,56483,12.6,27,2413,2021-02-20,Closed,0,27,6,1,0,12,62,No,Poor,Synthetic_Historical_Loan_Data
+HL0000005,APP000485,L003_PER_954,ICICI Bank,Personal Loan,819723,16.0,38,27636,2022-06-02,Settled,0,38,4,0,0,9,0,No,Good,Synthetic_Historical_Loan_Data
+HL0000006,APP004453,L002_GOL_982,HDFC Bank,Gold Loan,804616,15.69,17,53093,2025-01-21,Overdue,273686,17,0,4,0,0,9325,No,Good,Synthetic_Historical_Loan_Data
+HL0000007,APP002452,L008_PER_721,Kotak Mahindra Bank,Personal Loan,1000000,16.31,60,24483,2020-01-26,Closed,0,60,55,0,0,5,0,No,Fair,Synthetic_Historical_Loan_Data
+HL0000008,APP003190,L007_VEH_159,Canara Bank,Vehicle Loan,655906,15.07,12,59223,2021-02-17,Active,122899,12,4,1,0,5,2592,No,Poor,Synthetic_Historical_Loan_Data
+HL0000009,APP002321,L008_BUS_746,Kotak Mahindra Bank,Business Loan,200000,11.65,27,8456,2017-08-11,Active,132352,27,24,1,1,0,128,No,Fair,Synthetic_Historical_Loan_Data
+HL0000010,APP001133,L001_EDU_716,State Bank of India,Education Loan,1000000,11.84,23,48811,2025-06-27,Closed,0,23,13,1,1,3,1405,No,Excellent,Synthetic_Historical_Loan_Data
+HL0000011,APP004430,L011_HOM_102,Bajaj Finance,Home Loan,23949,12.61,35,821,2019-08-12,Closed,0,35,30,0,2,11,0,No,Poor,Synthetic_Historical_Loan_Data
+HL0000012,APP000310,L001_HOM_204,State Bank of India,Home Loan,442469,11.46,28,18084,2022-02-17,Closed,0,28,9,2,1,6,1154,No,Fair,Synthetic_Historical_Loan_Data
+HL0000013,APP004061,L010_CON_597,IndusInd Bank,Consumer Durable Loan,1000000,19.49,84,21900,2022-02-17,Active,167800,84,34,2,0,3,454,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000014,APP001270,L001_CON_448,State Bank of India,Consumer Durable Loan,804667,15.35,49,22204,2017-08-17,Closed,0,49,31,1,1,9,541,No,Fair,Synthetic_Historical_Loan_Data
+HL0000015,APP004765,L005_GOL_400,Punjab National Bank,Gold Loan,1000000,17.24,84,20575,2018-01-15,Overdue,0,84,71,2,3,12,1504,No,Good,Synthetic_Historical_Loan_Data
+HL0000016,APP000066,L009_PER_319,IDFC FIRST Bank,Personal Loan,804199,19.0,17,54329,2017-07-14,Active,315238,17,14,1,1,10,2546,No,Good,Synthetic_Historical_Loan_Data
+HL0000017,APP002701,L001_GOL_658,State Bank of India,Gold Loan,1000000,17.51,56,26259,2025-12-01,Closed,0,56,31,0,2,6,0,No,Delayed,Synthetic_Historical_Loan_Data
+HL0000018,APP001589,L002_HOM_489,HDFC Bank,Home Loan,867048,9.59,60,18248,2026-06-25,Active,337856,60,37,0,1,15,0,No,Good,Synthetic_Historical_Loan_Data
+HL0000019,APP004281,L005_GOL_400,Punjab National Bank,Gold Loan,1000000,16.74,43,31081,2025-04-14,Closed,0,43,34,1,0,8,1499,No,Good,Synthetic_Historical_Loan_Data
+HL0000020,APP001375,L003_CON_132,ICICI Bank,Consumer Durable Loan,1000000,21.63,22,55464,2023-02-15,Closed,0,22,18,1,2,9,2261,No,Good,Synthetic_Historical_Loan_Data

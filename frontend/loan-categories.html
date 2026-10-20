@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Loan Categories — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="lw-layout">
+  <div id="sidebarOverlay" class="lw-sidebar-overlay"></div>
+  <aside id="lwSidebar" class="lw-sidebar"></aside>
+  <div class="lw-main">
+    <header id="lwTopbar" class="lw-topbar"></header>
+    <main class="lw-page-content">
+      <div class="lw-breadcrumb"><a href="dashboard.html">Dashboard</a> / Loan Categories</div>
+      <h1 class="lw-page-title">Loan Categories</h1>
+      <p class="lw-page-subtitle">Browse verified loan products by category. Counts loaded from the live catalogue.</p>
+      <div id="catAlert"></div>
+      <div class="row g-4" id="categoriesGrid">
+        <div class="col-12 text-center py-5 text-muted">Loading categories from catalogue...</div>
+      </div>
+    </main>
+    <footer class="la-footer text-center"><div class="container"><p class="mb-0 small">LoanWise AI — All product counts from live MongoDB catalogue.</p></div></footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script>
+const CATEGORY_ICONS = {
+  "Personal Loan": "💳",
+  "Home Loan": "🏠",
+  "Vehicle Loan": "🚗",
+  "Education Loan": "🎓",
+  "Gold Loan": "🪙",
+  "Business Loan": "💼",
+  "Consumer Durable Loan": "📺",
+};
+
+$(function() {
+  initPageLayout("loan-categories", "Loan Categories");
+  laAjax("GET", "/api/loans/categories")
+    .then(data => {
+      if (!data.length) {
+        $("#categoriesGrid").html('<div class="col-12"><div class="empty-state"><div class="empty-icon">📂</div><div class="empty-msg">No loan categories available.</div><div class="empty-sub">Please ensure the product catalogue has been seeded.</div></div></div>');
+        return;
+      }
+      let html = "";
+      data.forEach(cat => {
+        const icon = CATEGORY_ICONS[cat.category] || "📋";
+        html += `<div class="col-6 col-md-4 col-lg-3">
+          <div class="category-card h-100" onclick="window.location.href='loan-search.html?category=${encodeURIComponent(cat.category)}'">
+            <div class="cat-icon">${icon}</div>
+            <div class="cat-name">${escapeHtml(cat.category)}</div>
+            <div class="cat-count">${cat.product_count} products from ${cat.lender_count} lenders</div>
+            <div class="mt-3"><button class="btn btn-sm btn-la-primary w-100">Explore Products</button></div>
+          </div>
+        </div>`;
+      });
+      $("#categoriesGrid").html(html);
+    })
+    .catch(err => showAlert("catAlert", err.message, "danger"));
+});
+</script>
+</body>
+</html>

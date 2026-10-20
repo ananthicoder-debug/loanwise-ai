@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Register — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="auth-wrapper">
+  <div class="auth-card" style="max-width:500px">
+    <div class="auth-logo text-center mb-1">💜 LoanWise <span>AI</span></div>
+    <p class="text-center text-muted small mb-4">Create your account</p>
+    <div id="registerAlert"></div>
+    <form id="registerForm">
+      <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="regName" placeholder="Your full name" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="regEmail" placeholder="you@example.com" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" id="regPhone" placeholder="10-digit mobile number" maxlength="10" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="regPassword" placeholder="Minimum 6 characters" required minlength="6">
+          <button class="btn btn-outline-secondary" type="button" id="toggleRegPwd">👁</button>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-la-primary w-100 py-2" id="registerBtn">Create Account</button>
+    </form>
+    <div class="text-center mt-3 small text-muted">
+      Already have an account? <a href="login.html" class="text-primary-la fw-bold">Sign In</a>
+    </div>
+    <div class="mt-3 small text-muted bg-light rounded p-2">
+      <strong>Note:</strong> After registering, complete your financial profile on the Dashboard to run eligibility and affordability assessments.
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/auth.js"></script>
+<script>$(function(){
+  if (getToken()) { window.location.href = "dashboard.html"; return; }
+  initRegisterPage();
+});</script>
+</body>
+</html>

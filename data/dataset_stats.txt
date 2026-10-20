@@ -1,0 +1,17 @@
+borrowers_rows: 5000
+borrowers_cols: 42
+borrowers_missing_pct: 2.104761904761905
+duplicate_applicants: 0
+unique_borrowers: 5000
+unique_lenders: 12
+unique_products: 62
+eligibility_dist: {'Eligible': 3151, 'Not_Eligible': 1849}
+affordability_dist: {'Manageable': 4351, 'Not_Manageable': 649}
+loan_category_dist: {'Personal Loan': 1765, 'Vehicle Loan': 888, 'Home Loan': 761, 'Business Loan': 723, 'Consumer Durable Loan': 521, 'Education Loan': 247, 'Gold Loan': 95}
+employment_dist: {'Salaried': 2289, 'Private Employee': 939, 'Self-Employed': 870, 'Government Employee': 251, 'Professional': 250, 'Business Owner': 249, 'PSU Employee': 96, 'Defence Employee': 56}
+avg_income: 59924.1068
+median_income: 40200.0
+avg_cibil: 700.0682
+avg_loan_amount: 761283.6593
+avg_emi: 40555.6583
+avg_dti: 0.035128

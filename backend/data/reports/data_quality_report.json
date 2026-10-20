@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-10-01T05:49:32.135076",
+  "checks": [
+    {
+      "dataset": "eligibility_dataset",
+      "total_records": 5000,
+      "missing_values": 0,
+      "duplicate_rows": 0,
+      "status": "PASS",
+      "notes": ""
+    },
+    {
+      "dataset": "affordability_dataset",
+      "total_records": 5000,
+      "missing_values": 0,
+      "duplicate_rows": 0,
+      "status": "PASS",
+      "notes": "Dataset is imbalanced \u2014 22.5% Manageable vs 77.5% Not Manageable. Class weights applied during training."
+    },
+    {
+      "dataset": "borrowers",
+      "total_records": 5000,
+      "missing_values": 7445,
+      "duplicate_rows": 0,
+      "status": "WARN",
+      "notes": ""
+    },
+    {
+      "dataset": "historical_loans",
+      "total_records": 10000,
+      "missing_values": 0,
+      "duplicate_rows": 0,
+      "status": "PASS",
+      "notes": ""
+    },
+    {
+      "dataset": "installment_payments",
+      "total_records": 344461,
+      "missing_values": 279558,
+      "duplicate_rows": 0,
+      "status": "WARN",
+      "notes": "Paid_Date and Days_Late are null for Pending/Missed rows \u2014 expected behaviour"
+    },
+    {
+      "dataset": "lenders",
+      "total_records": 12,
+      "missing_values": 0,
+      "duplicate_rows": 0,
+      "status": "PASS",
+      "notes": ""
+    },
+    {
+      "dataset": "loan_products",
+      "total_records": 62,
+      "missing_values": 0,
+      "duplicate_rows": 0,
+      "status": "PASS",
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,516 @@
+{
+  "generated_at": "2026-10-01T05:49:30.903193",
+  "datasets": {
+    "eligibility_dataset": {
+      "file": "eligibility_dataset.csv",
+      "total_records": 5000,
+      "columns": [
+        "age",
+        "education",
+        "employment_type",
+        "annual_income",
+        "dependents",
+        "cibil_score",
+        "existing_loans",
+        "outstanding_debt",
+        "loan_amount",
+        "loan_tenure",
+        "loan_status"
+      ],
+      "target": "loan_status",
+      "class_distribution": {
+        "1": 3089,
+        "0": 1911
+      },
+      "class_balance_pct": {
+        "eligible": 61.8,
+        "not_eligible": 38.2
+      },
+      "income_stats": {
+        "min": 63000.0,
+        "max": 2059000.0,
+        "mean": 497670.4,
+        "median": 464000.0,
+        "std": 222824.61
+      },
+      "cibil_stats": {
+        "min": 373.0,
+        "max": 900.0,
+        "mean": 680.4,
+        "median": 680.0,
+        "std": 88.21
+      },
+      "loan_amount_stats": {
+        "min": 17000.0,
+        "max": 1931000.0,
+        "mean": 453073.2,
+        "median": 402000.0,
+        "std": 261113.13
+      },
+      "loan_tenure_stats": {
+        "min": 12.0,
+        "max": 120.0,
+        "mean": 54.76,
+        "median": 48.0,
+        "std": 34.4
+      },
+      "age_stats": {
+        "min": 21.0,
+        "max": 59.0,
+        "mean": 39.8,
+        "median": 40.0,
+        "std": 11.18
+      },
+      "education_dist": {
+        "Graduate": 3763,
+        "Not Graduate": 1237
+      },
+      "employment_dist": {
+        "Salaried": 2858,
+        "Self-Employed": 1179,
+        "Business": 745,
+        "Student": 218
+      },
+      "missing_values": 0,
+      "duplicate_rows": 0,
+      "dataset_type": "Synthetic Training Data \u2014 NOT real borrower data"
+    },
+    "affordability_dataset": {
+      "file": "affordability_dataset.csv",
+      "total_records": 5000,
+      "columns": [
+        "monthly_income",
+        "dependents",
+        "existing_loans",
+        "current_emi",
+        "outstanding_debt",
+        "previous_loans",
+        "missed_payments",
+        "late_payments",
+        "proposed_amount",
+        "proposed_rate",
+        "proposed_tenure",
+        "proposed_emi",
+        "emi_income_ratio",
+        "manageable"
+      ],
+      "target": "manageable",
+      "class_distribution": {
+        "0": 3877,
+        "1": 1123
+      },
+      "class_balance_pct": {
+        "manageable": 22.5,
+        "not_manageable": 77.5
+      },
+      "class_imbalance_warning": "Dataset is imbalanced \u2014 22.5% Manageable vs 77.5% Not Manageable. Class weights applied during training.",
+      "income_stats": {
+        "min": 2800.0,
+        "max": 143900.0,
+        "mean": 40152.92,
+        "median": 37400.0,
+        "std": 18189.99
+      },
+      "current_emi_stats": {
+        "min": 0.0,
+        "max": 43170.0,
+        "mean": 6958.66,
+        "median": 5740.0,
+        "std": 5476.37
+      },
+      "outstanding_debt_stats": {
+        "min": 0.0,
+        "max": 757600.0,
+        "mean": 120458.7,
+        "median": 99700.0,
+        "std": 94583.3
+      },
+      "proposed_emi_stats": {
+        "min": 559.91,
+        "max": 188804.37,
+        "mean": 20363.25,
+        "median": 15015.42,
+        "std": 17516.13
+      },
+      "emi_income_ratio_stats": {
+        "min": 0.03,
+        "max": 11.66,
+        "mean": 0.82,
+        "median": 0.6,
+        "std": 0.79
+      },
+      "proposed_amount_stats": {
+        "min": 19000.0,
+        "max": 2565000.0,
+        "mean": 452730.8,
+        "median": 403000.0,
+        "std": 264468.8
+      },
+      "missed_payments_dist": {
+        "0": 3334,
+        "1": 1346,
+        "2": 280,
+        "3": 36,
+        "4": 4
+      },
+      "late_payments_dist": {
+        "0": 2261,
+        "1": 1811,
+        "2": 704,
+        "3": 178,
+        "4": 38,
+        "5": 7,
+        "6": 1
+      },
+      "missing_values": 0,
+      "duplicate_rows": 0,
+      "dataset_type": "Synthetic Training Data \u2014 NOT real borrower data"
+    },
+    "borrowers": {
+      "file": "borrowers.csv",
+      "total_records": 5000,
+      "columns": [
+        "Applicant_ID",
+        "Application_ID",
+        "Full_Name",
+        "Age",
+        "Gender",
+        "Marital_Status",
+        "State",
+        "City",
+        "Education",
+        "Employment_Type",
+        "Employer_Category",
+        "Years_of_Employment",
+        "Monthly_Income",
+        "Annual_Income",
+        "Number_of_Dependents",
+        "Residence_Type",
+        "Residential_Assets_Value",
+        "Commercial_Assets_Value",
+        "Vehicle_Owned",
+        "Existing_Loan_Count",
+        "Existing_Emi_Amount",
+        "Outstanding_Debt",
+        "Credit_Card_Outstanding",
+        "Credit_Utilization_Ratio",
+        "CIBIL_Score",
+        "Previous_Loan_Count",
+        "Previous_Loan_Repayment_Status",
+        "Missed_Payment_Count",
+        "Late_Payment_Count",
+        "Average_Days_Late",
+        "Banking_Relationship_Years",
+        "Requested_Loan_Category",
+        "Requested_Loan_Amount",
+        "Requested_Loan_Tenure",
+        "Loan_Purpose",
+        "Coapplicant",
+        "Coapplicant_Income",
+        "Debt_to_Income_Ratio",
+        "EMI_to_Income_Ratio",
+        "Eligibility_Target",
+        "Affordability_Target",
+        "Dataset_Type"
+      ],
+      "eligibility_dist": {
+        "Eligible": 3151,
+        "Not_Eligible": 1849
+      },
+      "affordability_dist": {
+        "Manageable": 4351,
+        "Not_Manageable": 649
+      },
+      "income_stats": {
+        "min": 12000.0,
+        "max": 500000.0,
+        "mean": 59924.11,
+        "median": 40200.0,
+        "std": 62872.54
+      },
+      "cibil_stats": {
+        "min": 454.0,
+        "max": 900.0,
+        "mean": 700.07,
+        "median": 700.0,
+        "std": 69.79
+      },
+      "age_stats": {
+        "min": 18.0,
+        "max": 68.0,
+        "mean": 34.81,
+        "median": 35.0,
+        "std": 8.8
+      },
+      "loan_amount_stats": {
+        "min": 5000.0,
+        "max": 17101207.0,
+        "mean": 1636073.46,
+        "median": 403675.0,
+        "std": 3052270.38
+      },
+      "employment_dist": {
+        "Salaried": 2289,
+        "Private Employee": 939,
+        "Self-Employed": 870,
+        "Government Employee": 251,
+        "Professional": 250,
+        "Business Owner": 249,
+        "PSU Employee": 96,
+        "Defence Employee": 56
+      },
+      "state_dist": {
+        "Gujarat": 340,
+        "Kerala": 334,
+        "Tamil Nadu": 333,
+        "West Bengal": 329,
+        "Uttar Pradesh": 321,
+        "Delhi": 317,
+        "Bihar": 313,
+        "Madhya Pradesh": 313,
+        "Odisha": 312,
+        "Andhra Pradesh": 311
+      },
+      "loan_category_dist": {
+        "Personal Loan": 1765,
+        "Vehicle Loan": 888,
+        "Home Loan": 761,
+        "Business Loan": 723,
+        "Consumer Durable Loan": 521,
+        "Education Loan": 247,
+        "Gold Loan": 95
+      },
+      "missing_values": 7445,
+      "missing_by_col": {
+        "Vehicle_Owned": 3025,
+        "Coapplicant_Income": 4420
+      },
+      "duplicate_rows": 0,
+      "dataset_type": "Synthetic Borrower Data \u2014 NOT real customer data"
+    },
+    "historical_loans": {
+      "file": "historical_loans.csv",
+      "total_records": 10000,
+      "loan_status_dist": {
+        "Active": 4537,
+        "Closed": 3525,
+        "Overdue": 995,
+        "Settled": 943
+      },
+      "repayment_status_dist": {
+        "Good": 3972,
+        "Excellent": 2509,
+        "Fair": 2004,
+        "Delayed": 1000,
+        "Poor": 515
+      },
+      "active_loans": 4537,
+      "closed_loans": 3525,
+      "loan_amount_stats": {
+        "min": 5000.0,
+        "max": 2000000.0,
+        "mean": 761283.66,
+        "median": 868460.0,
+        "std": 425105.67
+      },
+      "emi_stats": {
+        "min": 87.0,
+        "max": 179264.0,
+        "mean": 40555.66,
+        "median": 29398.0,
+        "std": 34760.63
+      },
+      "interest_rate_stats": {
+        "min": 9.18,
+        "max": 25.18,
+        "mean": 16.26,
+        "median": 15.46,
+        "std": 4.24
+      },
+      "tenure_stats": {
+        "min": 6.0,
+        "max": 154.0,
+        "mean": 34.45,
+        "median": 29.0,
+        "std": 22.08
+      },
+      "missed_installments_stats": {
+        "min": 0.0,
+        "max": 6.0,
+        "mean": 0.98,
+        "median": 1.0,
+        "std": 1.0
+      },
+      "late_installments_stats": {
+        "min": 0.0,
+        "max": 6.0,
+        "mean": 1.01,
+        "median": 1.0,
+        "std": 1.01
+      },
+      "avg_days_late_stats": {
+        "min": 0.0,
+        "max": 31.0,
+        "mean": 7.69,
+        "median": 7.0,
+        "std": 4.84
+      },
+      "outstanding_amount_stats": {
+        "min": 0.0,
+        "max": 1951573.0,
+        "mean": 201162.13,
+        "median": 24493.0,
+        "std": 304495.59
+      },
+      "lender_dist": {
+        "Axis Bank": 1148,
+        "State Bank of India": 1140,
+        "Kotak Mahindra Bank": 1075,
+        "HDFC Bank": 1001,
+        "Tata Capital": 981,
+        "ICICI Bank": 981,
+        "IDFC FIRST Bank": 792,
+        "IndusInd Bank": 787,
+        "Bank of Baroda": 652,
+        "Bajaj Finance": 492,
+        "Canara Bank": 481,
+        "Punjab National Bank": 470
+      },
+      "loan_category_dist": {
+        "Education Loan": 1805,
+        "Home Loan": 1648,
+        "Consumer Durable Loan": 1620,
+        "Vehicle Loan": 1561,
+        "Personal Loan": 1254,
+        "Gold Loan": 1103,
+        "Business Loan": 1009
+      },
+      "early_closure_count": 199,
+      "missing_values": 0,
+      "dataset_type": "Synthetic Historical Loan Data \u2014 NOT real loan records"
+    },
+    "installment_payments": {
+      "file": "installment_payments.csv",
+      "total_records": 344461,
+      "payment_status_dist": {
+        "Paid": 169868,
+        "Pending": 122217,
+        "Late": 34814,
+        "Missed": 17562
+      },
+      "paid_count": 169868,
+      "late_count": 34814,
+      "missed_count": 17562,
+      "pending_count": 122217,
+      "due_amount_stats": {
+        "min": 87.0,
+        "max": 179264.0,
+        "mean": 27895.49,
+        "median": 22634.0,
+        "std": 24412.68
+      },
+      "amount_paid_stats": {
+        "min": 0.0,
+        "max": 179264.0,
+        "mean": 16596.18,
+        "median": 7867.0,
+        "std": 23284.73
+      },
+      "days_late_stats": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 5.99,
+        "median": 3.0,
+        "std": 8.9
+      },
+      "late_charge_stats": {
+        "min": 0.0,
+        "max": 7070.0,
+        "mean": 98.93,
+        "median": 4.0,
+        "std": 287.21
+      },
+      "missing_values": 279558,
+      "missing_paid_date": 139779,
+      "missing_note": "Paid_Date and Days_Late are null for Pending/Missed rows \u2014 expected behaviour",
+      "dataset_type": "Synthetic Payment History \u2014 NOT real payment data"
+    },
+    "lenders": {
+      "file": "lenders.csv",
+      "total_records": 12,
+      "lender_names": [
+        "State Bank of India",
+        "HDFC Bank",
+        "ICICI Bank",
+        "Axis Bank",
+        "Punjab National Bank",
+        "Bank of Baroda",
+        "Canara Bank",
+        "Kotak Mahindra Bank",
+        "IDFC FIRST Bank",
+        "IndusInd Bank",
+        "Bajaj Finance",
+        "Tata Capital"
+      ],
+      "lender_types": {
+        "Bank": 10,
+        "NBFC": 2
+      },
+      "verification_status": {
+        "Verified": 12
+      },
+      "all_verified": true,
+      "dataset_type": "Verified Product Catalogue \u2014 Real Indian lenders"
+    },
+    "loan_products": {
+      "file": "loan_products.csv",
+      "total_records": 62,
+      "category_dist": {
+        "Education Loan": 11,
+        "Home Loan": 10,
+        "Vehicle Loan": 10,
+        "Consumer Durable Loan": 10,
+        "Personal Loan": 8,
+        "Gold Loan": 7,
+        "Business Loan": 6
+      },
+      "lender_dist": {
+        "State Bank of India": 7,
+        "Axis Bank": 7,
+        "Kotak Mahindra Bank": 7,
+        "HDFC Bank": 6,
+        "ICICI Bank": 6,
+        "Tata Capital": 6,
+        "IDFC FIRST Bank": 5,
+        "IndusInd Bank": 5,
+        "Bank of Baroda": 4,
+        "Punjab National Bank": 3,
+        "Canara Bank": 3,
+        "Bajaj Finance": 3
+      },
+      "interest_rate_stats": {
+        "min": 9.15,
+        "max": 23.28,
+        "mean": 15.33,
+        "median": 14.2,
+        "std": 4.21
+      },
+      "loan_amount_stats": {
+        "min": 200000.0,
+        "max": 2000000.0,
+        "mean": 1083870.97,
+        "median": 1000000.0,
+        "std": 468759.63
+      },
+      "all_active": true,
+      "not_publicly_specified_fields": [
+        "Employment_Type_Requirement",
+        "Minimum_CIBIL_If_Publicly_Stated",
+        "Processing_Fee",
+        "Primary_Eligibility_Conditions",
+        "Product_Benefits"
+      ],
+      "dataset_type": "Verified Product Catalogue \u2014 Real Indian loan products"
+    }
+  }
+}

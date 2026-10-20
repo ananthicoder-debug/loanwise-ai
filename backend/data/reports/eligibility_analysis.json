@@ -1,0 +1,95 @@
+{
+  "dataset": "eligibility_dataset.csv",
+  "source": "data/raw/eligibility_dataset.csv",
+  "total_records": 5000,
+  "training_records": 4000,
+  "testing_records": 1000,
+  "target_column": "loan_status",
+  "class_distribution": {
+    "eligible": 3089,
+    "not_eligible": 1911
+  },
+  "class_balance_pct": {
+    "eligible": 61.8,
+    "not_eligible": 38.2
+  },
+  "features_used": [
+    "age",
+    "education_enc",
+    "employment_enc",
+    "annual_income",
+    "dependents",
+    "cibil_score",
+    "existing_loans",
+    "outstanding_debt",
+    "loan_amount",
+    "loan_tenure"
+  ],
+  "feature_count": 10,
+  "numerical_stats": {
+    "age": {
+      "min": 21.0,
+      "max": 59.0,
+      "mean": 39.8
+    },
+    "annual_income": {
+      "min": 63000.0,
+      "max": 2059000.0,
+      "mean": 497670.4
+    },
+    "cibil_score": {
+      "min": 373.0,
+      "max": 900.0,
+      "mean": 680.4
+    },
+    "loan_amount": {
+      "min": 17000.0,
+      "max": 1931000.0,
+      "mean": 453073.2
+    },
+    "loan_tenure": {
+      "min": 12.0,
+      "max": 120.0,
+      "mean": 54.76
+    },
+    "outstanding_debt": {
+      "min": 0.0,
+      "max": 549900.0,
+      "mean": 99177.48
+    }
+  },
+  "categorical_distributions": {
+    "education": {
+      "Graduate": 3763,
+      "Not Graduate": 1237
+    },
+    "employment_type": {
+      "Salaried": 2858,
+      "Self-Employed": 1179,
+      "Business": 745,
+      "Student": 218
+    }
+  },
+  "missing_values": 0,
+  "model_performance": {
+    "algorithm": "LogisticRegression",
+    "accuracy": 0.764,
+    "precision": 0.7859,
+    "recall": 0.8495,
+    "f1_score": 0.8165,
+    "roc_auc": 0.8347,
+    "confusion_matrix": [
+      [
+        239,
+        143
+      ],
+      [
+        93,
+        525
+      ]
+    ]
+  },
+  "feature_importance": {},
+  "disclaimer": "Trained on borrower profile data. AI output is an estimate \u2014 not a lender decision.",
+  "generated_at": "2026-10-20T18:14:08.689323"
+}

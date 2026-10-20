@@ -1,0 +1,6 @@
+Synthetic Indian Loan Eligibility and Repayment Dataset
+borrowers: rows=5000, columns=41, duplicates=0, missing_pct=0.00
+lenders: rows=12, columns=8, duplicates=0, missing_pct=0.00
+loan_products: rows=20, columns=29, duplicates=0, missing_pct=0.00
+historical_loans: rows=10000, columns=21, duplicates=0, missing_pct=0.00
+installment_payments: rows=60000, columns=15, duplicates=0, missing_pct=0.00
