@@ -13,22 +13,35 @@ Database: loan_ai_system
 """
 
 import os
+import ssl
 from dotenv import load_dotenv
 from pymongo import MongoClient, ASCENDING, DESCENDING
 
 load_dotenv()
 
-MONGODB_URI    = os.getenv("MONGODB_URI",    "mongodb://localhost:27017")
-DATABASE_NAME  = os.getenv("DATABASE_NAME",  "loan_ai_system")
+MONGODB_URI   = os.getenv("MONGODB_URI",   "mongodb://localhost:27017")
+DATABASE_NAME = os.getenv("DATABASE_NAME", "loan_ai_system")
 
 # Detect connection type for logging
-IS_ATLAS = "mongodb+srv" in MONGODB_URI
+IS_ATLAS    = "mongodb+srv" in MONGODB_URI
 _conn_label = "MongoDB Atlas" if IS_ATLAS else "Local MongoDB"
 
 # Atlas connections need a longer timeout; local can stay short
-_timeout_ms = 15000 if IS_ATLAS else 5000
+_timeout_ms = 20000 if IS_ATLAS else 5000
 
-client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=_timeout_ms)
+# Build client kwargs — add TLS settings for Atlas to avoid SSL handshake issues
+# on certain Linux environments (e.g. Render free tier)
+_client_kwargs: dict = {"serverSelectionTimeoutMS": _timeout_ms}
+
+if IS_ATLAS:
+    _client_kwargs.update({
+        "tls":               True,
+        "tlsAllowInvalidCertificates": False,
+        "retryWrites":       True,
+        "w":                 "majority",
+    })
+
+client = MongoClient(MONGODB_URI, **_client_kwargs)
 db     = client[DATABASE_NAME]
 
 collections = {
