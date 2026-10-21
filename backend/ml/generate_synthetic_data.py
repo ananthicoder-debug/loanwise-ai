@@ -1,4 +1,4 @@
-﻿"""
+"""
 ml/generate_synthetic_data.py
 -------------------------------
 Generates SYNTHETIC training datasets for Model 1 and Model 2.

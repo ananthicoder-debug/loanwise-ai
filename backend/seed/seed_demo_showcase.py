@@ -1,4 +1,4 @@
-﻿"""
+"""
 seed/seed_demo_showcase.py
 ---------------------------
 Creates ONE fully-populated demo user with data across ALL features:

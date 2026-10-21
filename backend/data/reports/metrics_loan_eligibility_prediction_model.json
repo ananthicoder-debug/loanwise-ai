@@ -1,0 +1,42 @@
+{
+  "key": "model_performance_loan_eligibility_prediction_model",
+  "model_name": "Loan Eligibility Prediction Model",
+  "algorithm": "LogisticRegression",
+  "features": [
+    "age",
+    "education_enc",
+    "employment_enc",
+    "annual_income",
+    "dependents",
+    "cibil_score",
+    "existing_loans",
+    "outstanding_debt",
+    "loan_amount",
+    "loan_tenure"
+  ],
+  "training_records": 4000,
+  "testing_records": 1000,
+  "dataset_name": "eligibility_dataset.csv (5000 records)",
+  "metrics": {
+    "accuracy": 0.764,
+    "precision": 0.7859,
+    "recall": 0.8495,
+    "f1_score": 0.8165,
+    "roc_auc": 0.8347,
+    "confusion_matrix": [
+      [
+        239,
+        143
+      ],
+      [
+        93,
+        525
+      ]
+    ]
+  },
+  "model_version": "2.0",
+  "model_file": "C:\\Users\\Admin\\Downloads\\LoanAssist-AI\\LoanAssist-AI\\backend\\ml\\models\\eligibility_model.joblib",
+  "training_date": "2026-10-21 14:24 UTC",
+  "data_type": "ML_Training_Data",
+  "disclaimer": "Metrics calculated on held-out test data. AI model outputs are estimates."
+}
