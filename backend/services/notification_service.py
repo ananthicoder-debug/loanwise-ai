@@ -1,4 +1,4 @@
-﻿"""
+"""
 services/notification_service.py
 ------------------------------------
 Purpose:

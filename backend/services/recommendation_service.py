@@ -1,4 +1,4 @@
-﻿"""
+"""
 services/recommendation_service.py
 -------------------------------------
 Rule engine: ELIGIBLE ∩ MANAGEABLE = RECOMMENDED (Top 3 by match score)

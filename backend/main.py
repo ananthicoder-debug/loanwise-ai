@@ -1,11 +1,3 @@
-﻿"""
-main.py
---------
-LoanWise AI — FastAPI Application Entry Point.
-Run: uvicorn main:app --reload
-Docs: http://127.0.0.1:8000/docs
-"""
-
 import sys
 import os
 
@@ -24,22 +16,18 @@ from routes import assessment
 
 app = FastAPI(
     title="LoanWise AI",
-    description="Intelligent Indian Loan Eligibility, Recommendation and Repayment Management System.",
+    description="Intelligent Indian Loan Eligibility and Recommendation System.",
     version="2.0.0",
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # Allow all — required for Netlify + Render free tier
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
-# Mount all routers
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(credit.router)
@@ -64,47 +52,54 @@ def on_startup():
     from database.mongodb import _conn_label
     if check_connection():
         create_indexes()
-        print(f"[LoanWise AI] Connected to {_conn_label} — database: {DATABASE_NAME}")
-        # Sync any model metrics that were saved to JSON during build phase
-        # (Atlas is unreachable during Render build, so metrics are saved to files first)
-        _sync_model_metrics_to_db()
+        print("[LoanWise AI] Connected to " + _conn_label + " — database: " + DATABASE_NAME)
+        _sync_metrics()
+        _seed_if_empty()
     else:
-        print(f"[LoanWise AI] WARNING: {_conn_label} not reachable. Check your connection and restart.")
+        print("[LoanWise AI] WARNING: " + _conn_label + " not reachable.")
 
 
-def _sync_model_metrics_to_db():
-    """
-    At app startup (not build), push any JSON-saved model metrics to MongoDB.
-    This handles the case where Atlas was unreachable during Render build phase.
-    """
+def _sync_metrics():
     import json
     from pathlib import Path
-    from database.mongodb import collections
-
+    from datetime import datetime, timezone
+    from database.mongodb import collections as cols
     reports_dir = Path(__file__).parent / "data" / "reports"
     synced = 0
-    for json_file in reports_dir.glob("metrics_*.json"):
+    for jf in reports_dir.glob("metrics_*.json"):
         try:
-            with open(json_file) as f:
-                doc = json.load(f)
+            doc = json.load(open(jf))
             if "key" in doc and "model_name" in doc:
-                # Remove non-serialisable fields then upsert
                 doc.pop("updated_at", None)
-                from datetime import datetime, timezone
                 doc["updated_at"] = datetime.now(timezone.utc)
-                collections["system_metadata"].replace_one(
-                    {"key": doc["key"]}, doc, upsert=True
-                )
+                cols["system_metadata"].replace_one({"key": doc["key"]}, doc, upsert=True)
                 synced += 1
         except Exception:
             pass
     if synced:
-        print(f"[LoanWise AI] Synced {synced} model metric record(s) from JSON to MongoDB.")
+        print("[LoanWise AI] Synced " + str(synced) + " model metric(s) to MongoDB.")
+
+
+def _seed_if_empty():
+    try:
+        from database.mongodb import collections as cols
+        if cols["lenders"].count_documents({}) >= 12:
+            return
+        print("[LoanWise AI] Database empty — seeding...")
+        import subprocess
+        r = subprocess.run([sys.executable, "seed/run_all_seeds.py"],
+                          capture_output=True, text=True, timeout=120)
+        if r.returncode == 0:
+            print("[LoanWise AI] Seeding complete.")
+        else:
+            print("[LoanWise AI] Seed output: " + r.stderr[-300:])
+    except Exception as e:
+        print("[LoanWise AI] Seed skipped: " + str(e))
 
 
 @app.get("/api/health")
 def health_check():
-    from database.mongodb import _conn_label, IS_ATLAS
+    from database.mongodb import IS_ATLAS
     connected = check_connection()
     return {
         "status": "ok" if connected else "degraded",
@@ -119,6 +114,6 @@ def root():
     return {
         "application": "LoanWise AI",
         "version": "2.0.0",
-        "description": "Intelligent Indian Loan Eligibility, Recommendation and Repayment Management System",
+        "description": "Intelligent Indian Loan Eligibility and Recommendation System",
         "docs": "/docs",
     }

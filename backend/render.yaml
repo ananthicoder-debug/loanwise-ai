@@ -5,7 +5,7 @@ services:
     region: singapore
     plan: free
     pythonVersion: "3.11.9"
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt && python ml/train_eligibility.py && python ml/train_affordability.py && python seed/run_all_seeds.py
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt && python ml/train_eligibility.py && python ml/train_affordability.py
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: MONGODB_URI

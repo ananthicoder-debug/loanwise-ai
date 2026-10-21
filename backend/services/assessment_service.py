@@ -1,4 +1,4 @@
-﻿"""
+"""
 services/assessment_service.py
 --------------------------------
 Full two-model assessment pipeline with calculation traces,
