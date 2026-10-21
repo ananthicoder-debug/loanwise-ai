@@ -5,7 +5,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "ml"))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from database.mongodb import check_connection, create_indexes, DATABASE_NAME
 from routes import (
     auth, users, applications, loans, predictions,
@@ -52,7 +51,7 @@ def on_startup():
     from database.mongodb import _conn_label
     if check_connection():
         create_indexes()
-        print("[LoanWise AI] Connected to " + _conn_label + " — database: " + DATABASE_NAME)
+        print("[LoanWise AI] Connected to " + _conn_label + " | database: " + DATABASE_NAME)
         _sync_metrics()
         _seed_if_empty()
     else:
@@ -85,7 +84,7 @@ def _seed_if_empty():
         from database.mongodb import collections as cols
         if cols["lenders"].count_documents({}) >= 12:
             return
-        print("[LoanWise AI] Database empty — seeding...")
+        print("[LoanWise AI] Database empty - seeding...")
         import subprocess
         r = subprocess.run([sys.executable, "seed/run_all_seeds.py"],
                           capture_output=True, text=True, timeout=120)
