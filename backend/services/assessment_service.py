@@ -36,7 +36,7 @@ from preprocessing import (
 )
 
 
-# ─── Helpers ──────────────────────────────────────────────────────────────────
+# ??? Helpers ??????????????????????????????????????????????????????????????????
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -58,14 +58,14 @@ def _safe_int(v, default=0):
 
 def _interpret_eti(ratio_pct):
     if ratio_pct is None:
-        return "Cannot assess — income data missing."
+        return "Cannot assess  -  income data missing."
     if ratio_pct <= 30:
-        return f"Comfortable — {ratio_pct:.1f}% of income committed to EMI."
+        return f"Comfortable  -  {ratio_pct:.1f}% of income committed to EMI."
     if ratio_pct <= 45:
-        return f"Moderate — {ratio_pct:.1f}% of income committed to EMI. Manageable but worth reviewing."
+        return f"Moderate  -  {ratio_pct:.1f}% of income committed to EMI. Manageable but worth reviewing."
     if ratio_pct <= 60:
-        return f"Elevated — {ratio_pct:.1f}% of income committed to EMI. Repayment burden is significant."
-    return f"High — {ratio_pct:.1f}% of income committed to EMI. Consider lower amount or longer tenure."
+        return f"Elevated  -  {ratio_pct:.1f}% of income committed to EMI. Repayment burden is significant."
+    return f"High  -  {ratio_pct:.1f}% of income committed to EMI. Consider lower amount or longer tenure."
 
 
 def _generate_eligibility_observations(credit_profile, application, m1_result, m1_prob, calc_ws) -> list:
@@ -101,10 +101,10 @@ def _generate_eligibility_observations(credit_profile, application, m1_result, m
         elif inc_to_loan >= 0.2:
             obs.append({"type": "neutral",  "text": "Requested amount is significant relative to declared annual income."})
         else:
-            obs.append({"type": "warning",  "text": "Requested amount is very high relative to declared annual income — lenders typically apply income multiples."})
+            obs.append({"type": "warning",  "text": "Requested amount is very high relative to declared annual income  -  lenders typically apply income multiples."})
 
     if loans == 0:
-        obs.append({"type": "positive", "text": "No existing loans — clean credit profile from an obligation standpoint."})
+        obs.append({"type": "positive", "text": "No existing loans  -  clean credit profile from an obligation standpoint."})
     elif loans <= 2:
         obs.append({"type": "neutral",  "text": f"{loans} existing loan(s) noted. Within a typical manageable range."})
     else:
@@ -131,7 +131,7 @@ def _generate_affordability_observations(credit_profile, calc_ws, m2_result, m2_
             "text": f"The affordability model estimates a {conf_pct}% probability that the proposed loan is manageable."})
     else:
         obs.append({"type": "warning",
-            "text": f"The affordability model estimates a {conf_pct}% probability for the manageable class — indicating potential repayment risk."})
+            "text": f"The affordability model estimates a {conf_pct}% probability for the manageable class  -  indicating potential repayment risk."})
 
     if eti is not None:
         obs.append({"type": "info", "text": _interpret_eti(eti)})
@@ -142,17 +142,17 @@ def _generate_affordability_observations(credit_profile, calc_ws, m2_result, m2_
                 "text": f"Estimated surplus of Rs.{surplus:,.0f}/month after EMI. Actual surplus depends on living expenses not captured here."})
         elif surplus >= 0:
             obs.append({"type": "neutral",
-                "text": f"Estimated surplus of Rs.{surplus:,.0f}/month after EMI is thin — limited financial buffer."})
+                "text": f"Estimated surplus of Rs.{surplus:,.0f}/month after EMI is thin  -  limited financial buffer."})
         else:
             obs.append({"type": "warning",
-                "text": f"Estimated surplus is negative (Rs.{surplus:,.0f}/month) — declared EMI obligations exceed income."})
+                "text": f"Estimated surplus is negative (Rs.{surplus:,.0f}/month)  -  declared EMI obligations exceed income."})
 
     if missed == 0 and late == 0:
-        obs.append({"type": "positive", "text": "No missed or late payments in the profile — positive repayment signal."})
+        obs.append({"type": "positive", "text": "No missed or late payments in the profile  -  positive repayment signal."})
     elif missed > 2:
         obs.append({"type": "warning",  "text": f"{missed} missed payment(s) are a significant concern for repayment feasibility."})
     elif missed > 0 or late > 0:
-        obs.append({"type": "neutral",  "text": f"{missed} missed and {late} late payment(s) noted — minor to moderate impact."})
+        obs.append({"type": "neutral",  "text": f"{missed} missed and {late} late payment(s) noted  -  minor to moderate impact."})
 
     obs.append({"type": "info",
         "text": "This model cannot guarantee repayment success. Living expenses, unexpected events, and floating rates can affect actual repayment ability."})
@@ -164,19 +164,19 @@ def _generate_next_steps(m1_result, m2_result, calc_ws, rec_count, cibil) -> lis
     eti   = calc_ws["summary"].get("total_emi_ratio_pct") or 0
 
     if rec_count > 0:
-        steps.append("Review the recommended products — they match both the configured eligibility criteria and the affordability model.")
+        steps.append("Review the recommended products  -  they match both the configured eligibility criteria and the affordability model.")
     steps.append("Visit each lender's official website to verify current rates, eligibility conditions, and required documents.")
     steps.append("Use the EMI Calculator to compare different amounts and tenures before applying.")
     if eti > 50:
         steps.append("Consider requesting a lower loan amount or a longer tenure to bring the EMI-to-income ratio below 50%.")
     if cibil and cibil < 700:
-        steps.append("Work on improving your CIBIL score — timely payments on existing loans and reducing outstanding balances help.")
-    steps.append("Ensure all submitted profile information (income, EMI, existing loans) is accurate — model estimates are only as reliable as the input data.")
+        steps.append("Work on improving your CIBIL score  -  timely payments on existing loans and reducing outstanding balances help.")
+    steps.append("Ensure all submitted profile information (income, EMI, existing loans) is accurate  -  model estimates are only as reliable as the input data.")
     steps.append("Consult the lender directly before submitting a formal application. This report is for decision support only.")
     return steps
 
 
-# ─── Main assessment function ─────────────────────────────────────────────────
+# ??? Main assessment function ?????????????????????????????????????????????????
 
 def run_full_assessment(user_id: str, application: dict, what_if: dict = None) -> dict:
     """
@@ -200,7 +200,7 @@ def run_full_assessment(user_id: str, application: dict, what_if: dict = None) -
         effective_app.update({k: v for k, v in what_if.items() if v is not None})
         is_what_if = True
 
-    # ── Raw values ────────────────────────────────────────────────────────────
+    # ?? Raw values ????????????????????????????????????????????????????????????
     monthly_income = _safe_float(
         credit_profile.get("monthly_income") or credit_profile.get("Monthly_Income")
     )
@@ -215,18 +215,18 @@ def run_full_assessment(user_id: str, application: dict, what_if: dict = None) -
     loan_tenure = _safe_int(effective_app.get("loan_tenure"))
     proposed_rate = _safe_float(effective_app.get("proposed_rate") or effective_app.get("interest_rate"), 12.0)
 
-    # ── Proposed EMI ──────────────────────────────────────────────────────────
+    # ?? Proposed EMI ??????????????????????????????????????????????????????????
     try:
         proposed_emi = calculate_emi(loan_amount, proposed_rate, loan_tenure)
     except Exception:
         proposed_emi = 0.0
 
-    # ── Calculation worksheet ─────────────────────────────────────────────────
+    # ?? Calculation worksheet ?????????????????????????????????????????????????
     calc_ws = build_full_calculation_worksheet(
         credit_profile, effective_app, proposed_emi, proposed_rate
     )
 
-    # ── Model 1: Eligibility ──────────────────────────────────────────────────
+    # ?? Model 1: Eligibility ??????????????????????????????????????????????????
     m1_result, m1_prob = predict_eligibility(credit_profile, effective_app)
     elig_vector = build_eligibility_vector(credit_profile, effective_app)
     elig_explain = explain_eligibility(elig_vector, ELIGIBILITY_FEATURES)
@@ -234,7 +234,7 @@ def run_full_assessment(user_id: str, application: dict, what_if: dict = None) -
         credit_profile, effective_app, m1_result, m1_prob, calc_ws
     )
 
-    # ── Model 2: Affordability ────────────────────────────────────────────────
+    # ?? Model 2: Affordability ????????????????????????????????????????????????
     m2_result, m2_prob = predict_affordability(credit_profile, effective_app, proposed_emi)
     aff_vector = build_affordability_vector(credit_profile, effective_app, proposed_emi)
     aff_explain = explain_affordability(aff_vector, AFFORDABILITY_FEATURES)
@@ -243,7 +243,7 @@ def run_full_assessment(user_id: str, application: dict, what_if: dict = None) -
         credit_profile, calc_ws, m2_result, m2_prob, repayment
     )
 
-    # ── Product matching ──────────────────────────────────────────────────────
+    # ?? Product matching ??????????????????????????????????????????????????????
     category = effective_app.get("loan_category", "")
     products = list(collections["loan_products"].find({"loan_category": category, "is_active": True}))
     lender_ids = {p.get("lender_id") for p in products if p.get("lender_id")}
@@ -347,10 +347,10 @@ def run_full_assessment(user_id: str, application: dict, what_if: dict = None) -
     recommended_products.sort(key=lambda x: x.get("match_score", 0), reverse=True)
     top_recs = recommended_products[:3]
 
-    # ── Next steps ────────────────────────────────────────────────────────────
+    # ?? Next steps ????????????????????????????????????????????????????????????
     next_steps = _generate_next_steps(m1_result, m2_result, calc_ws, len(top_recs), cibil)
 
-    # ── Assemble assessment result ────────────────────────────────────────────
+    # ?? Assemble assessment result ????????????????????????????????????????????
     assessment = {
         "assessment_id":     str(application.get("_id", "")) if not is_what_if else None,
         "is_what_if":        is_what_if,
@@ -417,7 +417,7 @@ def run_full_assessment(user_id: str, application: dict, what_if: dict = None) -
             "confidence_pct": round(m2_prob * 100),
             "display_result": (
                 "Manageable" if m2_result == "Manageable"
-                else "Not Manageable — potential repayment burden"
+                else "Not Manageable  -  potential repayment burden"
             ),
             "result_note": (
                 "This model estimates repayment feasibility based on declared income, "
@@ -458,7 +458,7 @@ def run_full_assessment(user_id: str, application: dict, what_if: dict = None) -
 
         # Disclaimer
         "disclaimer": (
-            "LoanWise AI — This assessment is based on AI models and the financial information you provided. "
+            "LoanWise AI  -  This assessment is based on AI models and the financial information you provided. "
             "It is an estimate for decision-support purposes. "
             "It is not a guarantee of loan approval, a lender's decision, or financial advice. "
             "Final eligibility, pricing, and approval are determined solely by the lender."
@@ -475,12 +475,12 @@ def _feat_desc(feat: str, model_type: str) -> str:
     return AFFORDABILITY_DESCRIPTIONS.get(feat, feat)
 
 
-# ─── What-if analysis ────────────────────────────────────────────────────────
+# ??? What-if analysis ????????????????????????????????????????????????????????
 
 def run_what_if(user_id: str, application: dict, what_if: dict) -> dict:
     """
     Runs the assessment with what-if parameters.
-    Clearly labeled as a scenario — does not touch saved records.
+    Clearly labeled as a scenario  -  does not touch saved records.
     """
     result = run_full_assessment(user_id, application, what_if=what_if)
     result["scenario_label"] = (

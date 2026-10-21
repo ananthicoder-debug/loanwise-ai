@@ -66,7 +66,7 @@ def get_dashboard(user: dict = Depends(get_current_user)):
     for a in sorted(applications, key=lambda x: x["application_date"], reverse=True)[:3]:
         recent_activity.append({
             "type": "eligibility_checked",
-            "message": f"Checked eligibility for a {a['loan_category']} of ₹{a['loan_amount']:,.0f}",
+            "message": f"Checked eligibility for a {a['loan_category']} of Rs.{a['loan_amount']:,.0f}",
             "date": a["application_date"].strftime("%Y-%m-%d") if hasattr(a["application_date"], "strftime") else str(a["application_date"]),
         })
     for r in collections["recommendations"].find({"application_id": {"$in": application_ids}}).sort("created_at", -1).limit(3):

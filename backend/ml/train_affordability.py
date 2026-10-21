@@ -5,7 +5,7 @@ Trains Model 2 using data/raw/affordability_dataset.csv (5000 records).
 Target: manageable (0=Not Manageable, 1=Manageable).
 
 NOTE: This script saves everything to .joblib and .json files ONLY.
-      It never calls MongoDB — that avoids the SSL handshake error
+      It never calls MongoDB  -  that avoids the SSL handshake error
       in Render's build container.
       FastAPI startup (main.py) syncs the JSON metrics to Atlas.
 """
@@ -123,7 +123,7 @@ def train():
         for feat, imp in fi_sorted:
             print(f"    {feat:<35} {imp:.4f}")
 
-    # ── Save model artifacts ──────────────────────────────────────────────────
+    # ?? Save model artifacts ??????????????????????????????????????????????????
     MODEL_OUT.parent.mkdir(parents=True, exist_ok=True)
     bundle = {
         "model": best_model, "features": AFFORDABILITY_FEATURES,
@@ -135,7 +135,7 @@ def train():
     joblib.dump(scaler, SCALER_OUT)
     print(f"\nSaved: {MODEL_OUT}")
 
-    # ── Save ALL metrics to JSON (no MongoDB call here) ───────────────────────
+    # ?? Save ALL metrics to JSON (no MongoDB call here) ???????????????????????
     REPORTS.mkdir(parents=True, exist_ok=True)
 
     analysis = {
@@ -161,7 +161,7 @@ def train():
             "confusion_matrix": cm,
         },
         "feature_importance": {k: round(float(v), 6) for k, v in fi_sorted[:10]},
-        "disclaimer": "Trained on borrower financial profile data. AI output is an estimate — not a repayment guarantee.",
+        "disclaimer": "Trained on borrower financial profile data. AI output is an estimate  -  not a repayment guarantee.",
         "generated_at": datetime.now().isoformat(),
     }
     with open(REPORTS / "affordability_analysis.json", "w") as f:

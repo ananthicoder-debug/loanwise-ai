@@ -19,7 +19,7 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-# ─── EMI formula (reducing balance) ─────────────────────────────────────────
+# ??? EMI formula (reducing balance) ?????????????????????????????????????????
 
 def calculate_emi_with_trace(
     principal: float,
@@ -27,7 +27,7 @@ def calculate_emi_with_trace(
     tenure_months: int,
 ) -> dict:
     """
-    EMI = P × r × (1 + r)^n / ((1 + r)^n − 1)
+    EMI = P ? r ? (1 + r)^n / ((1 + r)^n ? 1)
     Returns { result, trace, steps }.
     """
     if principal <= 0 or tenure_months <= 0:
@@ -50,9 +50,9 @@ def calculate_emi_with_trace(
         factor = (1 + r) ** tenure_months
         emi = round(principal * r * factor / (factor - 1), 2)
         steps = [
-            f"r = {annual_rate_pct}% ÷ 12 ÷ 100 = {r:.6f}",
+            f"r = {annual_rate_pct}% ? 12 ? 100 = {r:.6f}",
             f"(1 + r)^n = (1 + {r:.6f})^{tenure_months} = {factor:.6f}",
-            f"EMI = {principal:,.2f} × {r:.6f} × {factor:.6f} / ({factor:.6f} - 1)",
+            f"EMI = {principal:,.2f} ? {r:.6f} ? {factor:.6f} / ({factor:.6f} - 1)",
             f"EMI = {emi:,.2f}",
         ]
 
@@ -61,7 +61,7 @@ def calculate_emi_with_trace(
 
     trace = {
         "calculation_name": "proposed_emi",
-        "formula": "P × r × (1 + r)^n / ((1 + r)^n − 1)",
+        "formula": "P ? r ? (1 + r)^n / ((1 + r)^n ? 1)",
         "formula_note": "Monthly reducing-balance EMI formula",
         "inputs": {
             "principal": principal,
@@ -84,10 +84,10 @@ def calculate_emi_with_trace(
             "total_payment": total_payment, "total_interest": total_interest}
 
 
-# ─── Ratio calculations ───────────────────────────────────────────────────────
+# ??? Ratio calculations ???????????????????????????????????????????????????????
 
 def emi_burden_with_trace(existing_emi: float, monthly_income: float) -> dict:
-    """Existing EMI Burden = (Existing EMI / Monthly Income) × 100"""
+    """Existing EMI Burden = (Existing EMI / Monthly Income) ? 100"""
     name = "existing_emi_burden"
     if monthly_income <= 0:
         return {"result": None, "trace": None,
@@ -95,13 +95,13 @@ def emi_burden_with_trace(existing_emi: float, monthly_income: float) -> dict:
     result = round((existing_emi / monthly_income) * 100, 2)
     trace = {
         "calculation_name": name,
-        "formula": "(existing_emi / monthly_income) × 100",
+        "formula": "(existing_emi / monthly_income) ? 100",
         "inputs": {"existing_emi": existing_emi, "monthly_income": monthly_income},
         "derived_values": {},
         "result": result,
         "unit": "percent",
         "steps": [
-            f"({existing_emi:,.2f} / {monthly_income:,.2f}) × 100 = {result:.2f}%"
+            f"({existing_emi:,.2f} / {monthly_income:,.2f}) ? 100 = {result:.2f}%"
         ],
         "rounding": "2 decimal places",
         "calculated_at": _now(),
@@ -114,7 +114,7 @@ def total_emi_ratio_with_trace(
     proposed_emi: float,
     monthly_income: float,
 ) -> dict:
-    """Total EMI-to-Income Ratio = (Existing EMI + Proposed EMI) / Monthly Income × 100"""
+    """Total EMI-to-Income Ratio = (Existing EMI + Proposed EMI) / Monthly Income ? 100"""
     name = "total_emi_to_income_ratio"
     total_emi = existing_emi + proposed_emi
     if monthly_income <= 0:
@@ -123,7 +123,7 @@ def total_emi_ratio_with_trace(
     result = round((total_emi / monthly_income) * 100, 2)
     trace = {
         "calculation_name": name,
-        "formula": "((existing_emi + proposed_emi) / monthly_income) × 100",
+        "formula": "((existing_emi + proposed_emi) / monthly_income) ? 100",
         "inputs": {
             "existing_emi": existing_emi,
             "proposed_emi": proposed_emi,
@@ -134,7 +134,7 @@ def total_emi_ratio_with_trace(
         "unit": "percent",
         "steps": [
             f"total_emi = {existing_emi:,.2f} + {proposed_emi:,.2f} = {total_emi:,.2f}",
-            f"ratio = ({total_emi:,.2f} / {monthly_income:,.2f}) × 100 = {result:.2f}%",
+            f"ratio = ({total_emi:,.2f} / {monthly_income:,.2f}) ? 100 = {result:.2f}%",
         ],
         "rounding": "2 decimal places",
         "calculated_at": _now(),
@@ -148,13 +148,13 @@ def monthly_surplus_with_trace(
     proposed_emi: float,
     other_obligations: float = 0.0,
 ) -> dict:
-    """Estimated Surplus = Monthly Income − Existing EMI − Proposed EMI − Other"""
+    """Estimated Surplus = Monthly Income ? Existing EMI ? Proposed EMI ? Other"""
     name = "estimated_monthly_surplus"
     total_deductions = existing_emi + proposed_emi + other_obligations
     surplus = round(monthly_income - total_deductions, 2)
     trace = {
         "calculation_name": name,
-        "formula": "monthly_income − existing_emi − proposed_emi − other_obligations",
+        "formula": "monthly_income ? existing_emi ? proposed_emi ? other_obligations",
         "inputs": {
             "monthly_income": monthly_income,
             "existing_emi": existing_emi,
@@ -170,7 +170,7 @@ def monthly_surplus_with_trace(
         ),
         "steps": [
             f"total_deductions = {existing_emi:,.2f} + {proposed_emi:,.2f} + {other_obligations:,.2f} = {total_deductions:,.2f}",
-            f"surplus = {monthly_income:,.2f} − {total_deductions:,.2f} = {surplus:,.2f}",
+            f"surplus = {monthly_income:,.2f} ? {total_deductions:,.2f} = {surplus:,.2f}",
         ],
         "rounding": "2 decimal places",
         "calculated_at": _now(),
@@ -182,7 +182,7 @@ def debt_to_income_with_trace(
     total_monthly_debt_payments: float,
     monthly_income: float,
 ) -> dict:
-    """DTI = (Total Monthly Debt Payments / Monthly Income) × 100"""
+    """DTI = (Total Monthly Debt Payments / Monthly Income) ? 100"""
     name = "debt_to_income_ratio"
     if monthly_income <= 0:
         return {"result": None, "trace": None,
@@ -190,7 +190,7 @@ def debt_to_income_with_trace(
     result = round((total_monthly_debt_payments / monthly_income) * 100, 2)
     trace = {
         "calculation_name": name,
-        "formula": "(total_monthly_debt_payments / monthly_income) × 100",
+        "formula": "(total_monthly_debt_payments / monthly_income) ? 100",
         "inputs": {
             "total_monthly_debt_payments": total_monthly_debt_payments,
             "monthly_income": monthly_income,
@@ -200,7 +200,7 @@ def debt_to_income_with_trace(
         "unit": "percent",
         "note": "Uses total monthly debt payments (existing EMI), not outstanding principal balance.",
         "steps": [
-            f"({total_monthly_debt_payments:,.2f} / {monthly_income:,.2f}) × 100 = {result:.2f}%"
+            f"({total_monthly_debt_payments:,.2f} / {monthly_income:,.2f}) ? 100 = {result:.2f}%"
         ],
         "rounding": "2 decimal places",
         "calculated_at": _now(),
@@ -209,16 +209,16 @@ def debt_to_income_with_trace(
 
 
 def annual_income_with_trace(monthly_income: float) -> dict:
-    """Annual Income = Monthly Income × 12"""
+    """Annual Income = Monthly Income ? 12"""
     result = round(monthly_income * 12, 2)
     trace = {
         "calculation_name": "annual_income",
-        "formula": "monthly_income × 12",
+        "formula": "monthly_income ? 12",
         "inputs": {"monthly_income": monthly_income},
         "derived_values": {},
         "result": result,
         "unit": "INR / year",
-        "steps": [f"{monthly_income:,.2f} × 12 = {result:,.2f}"],
+        "steps": [f"{monthly_income:,.2f} ? 12 = {result:,.2f}"],
         "rounding": "2 decimal places",
         "calculated_at": _now(),
     }
@@ -229,7 +229,7 @@ def payment_completion_ratio_with_trace(
     paid_installments: int,
     total_due_installments: int,
 ) -> dict:
-    """Payment Completion Ratio = (Paid / Due) × 100"""
+    """Payment Completion Ratio = (Paid / Due) ? 100"""
     name = "payment_completion_ratio"
     if total_due_installments <= 0:
         return {"result": None, "trace": None,
@@ -237,7 +237,7 @@ def payment_completion_ratio_with_trace(
     result = round((paid_installments / total_due_installments) * 100, 1)
     trace = {
         "calculation_name": name,
-        "formula": "(paid_installments / total_due_installments) × 100",
+        "formula": "(paid_installments / total_due_installments) ? 100",
         "inputs": {
             "paid_installments": paid_installments,
             "total_due_installments": total_due_installments,
@@ -247,7 +247,7 @@ def payment_completion_ratio_with_trace(
         "unit": "percent",
         "note": "Denominator is the count of installments that were due (past due date), not total schedule.",
         "steps": [
-            f"({paid_installments} / {total_due_installments}) × 100 = {result:.1f}%"
+            f"({paid_installments} / {total_due_installments}) ? 100 = {result:.1f}%"
         ],
         "rounding": "1 decimal place",
         "calculated_at": _now(),
@@ -255,7 +255,7 @@ def payment_completion_ratio_with_trace(
     return {"result": result, "trace": trace}
 
 
-# ─── Full calculation worksheet ───────────────────────────────────────────────
+# ??? Full calculation worksheet ???????????????????????????????????????????????
 
 def build_full_calculation_worksheet(
     credit_profile: dict,

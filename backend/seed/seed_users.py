@@ -5,7 +5,7 @@ Creates sample Indian user profiles + 1 admin account.
 All demo user passwords: Demo@123
 Admin password: Admin@123
 
-These are synthetic profiles for demonstration — not real people.
+These are synthetic profiles for demonstration  -  not real people.
 """
 
 import sys

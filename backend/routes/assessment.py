@@ -4,11 +4,11 @@ routes/assessment.py
 Full two-model assessment endpoints with explainability, calculation
 traces, what-if analysis, and report retrieval.
 
-POST /api/assessment/full/{application_id}    — run full assessment, save to DB
-POST /api/assessment/what-if/{application_id} — what-if scenario (not saved)
-GET  /api/assessment/{assessment_id}           — retrieve saved assessment
-GET  /api/assessment/history                   — user's assessment history
-GET  /api/assessment/latest/{application_id}  — latest for an application
+POST /api/assessment/full/{application_id}     -  run full assessment, save to DB
+POST /api/assessment/what-if/{application_id}  -  what-if scenario (not saved)
+GET  /api/assessment/{assessment_id}            -  retrieve saved assessment
+GET  /api/assessment/history                    -  user's assessment history
+GET  /api/assessment/latest/{application_id}   -  latest for an application
 """
 
 from datetime import datetime, timezone
@@ -54,7 +54,7 @@ def _serialize_assessment(doc: dict) -> dict:
     return doc
 
 
-# ─── Full assessment ──────────────────────────────────────────────────────────
+# ??? Full assessment ??????????????????????????????????????????????????????????
 
 @router.post("/full/{application_id}")
 def run_assessment(application_id: str, user: dict = Depends(get_current_user)):
@@ -89,7 +89,7 @@ def run_assessment(application_id: str, user: dict = Depends(get_current_user)):
     return result
 
 
-# ─── What-if scenario ─────────────────────────────────────────────────────────
+# ??? What-if scenario ?????????????????????????????????????????????????????????
 
 @router.post("/what-if/{application_id}")
 def what_if_scenario(
@@ -113,7 +113,7 @@ def what_if_scenario(
     return result
 
 
-# ─── Retrieve saved assessments ───────────────────────────────────────────────
+# ??? Retrieve saved assessments ???????????????????????????????????????????????
 
 @router.get("/history")
 def assessment_history(user: dict = Depends(get_current_user)):

@@ -1,7 +1,7 @@
 """
 services/recommendation_service.py
 -------------------------------------
-Rule engine: ELIGIBLE ∩ MANAGEABLE = RECOMMENDED (Top 3 by match score)
+Rule engine: ELIGIBLE ? MANAGEABLE = RECOMMENDED (Top 3 by match score)
 ML models score the applicant. The verified catalogue provides actual lenders/products.
 """
 
@@ -11,7 +11,7 @@ from database.mongodb import collections
 from services.eligibility_service import evaluate_products_for_application
 from services.affordability_service import evaluate_affordability
 
-# Maximum recommendations to return to user (per requirement — top 3 most suitable)
+# Maximum recommendations to return to user (per requirement  -  top 3 most suitable)
 MAX_RECOMMENDATIONS = 3
 
 
@@ -21,8 +21,8 @@ def run_full_evaluation(user_id: str, application: dict) -> dict:
       1. Load credit profile
       2. Model 1 -> eligible products (ALL returned in catalogue)
       3. Model 2 -> affordability on eligible subset
-      4. Rule engine -> recommended = eligible ∩ manageable, sorted by match score
-      5. Return top MAX_RECOMMENDATIONS — the ones best matching user's profile
+      4. Rule engine -> recommended = eligible ? manageable, sorted by match score
+      5. Return top MAX_RECOMMENDATIONS  -  the ones best matching user's profile
     """
     credit_profile = collections["credit_profiles"].find_one({"user_id": ObjectId(user_id)})
     if not credit_profile:
@@ -135,9 +135,9 @@ def _generate_reason(credit_profile: dict, product: dict, model_1: dict) -> str:
     if emi_pct <= 40:
         parts.append("which is within a manageable range")
     elif emi_pct <= 55:
-        parts.append("which is moderate — worth reviewing your budget")
+        parts.append("which is moderate  -  worth reviewing your budget")
     else:
-        parts.append("which is on the higher side — review carefully")
+        parts.append("which is on the higher side  -  review carefully")
 
     if model_1["probability"] >= 0.7:
         parts.append(f"Profile eligibility confidence is {round(model_1['probability']*100)}%")

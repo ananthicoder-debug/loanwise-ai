@@ -26,7 +26,7 @@ try:
         _bundle = joblib.load(MODEL_PATH)
         _scaler = joblib.load(SCALER_PATH)
         if len(_bundle.get("features", [])) != len(AFFORDABILITY_FEATURES):
-            print("[Model 2] Feature count mismatch — retrain recommended. Using rule-based fallback.")
+            print("[Model 2] Feature count mismatch  -  retrain recommended. Using rule-based fallback.")
             _bundle = None
 except Exception as e:
     print(f"[Model 2] Failed to load: {e}. Using rule-based fallback.")

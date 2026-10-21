@@ -1,4 +1,4 @@
-"""models/payment.py — Pydantic schemas for active loans and payments."""
+"""models/payment.py  -  Pydantic schemas for active loans and payments."""
 
 from pydantic import BaseModel
 from typing import Optional

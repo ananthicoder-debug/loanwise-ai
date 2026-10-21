@@ -2,7 +2,7 @@
 seed/seed_lenders.py
 ---------------------
 Imports the verified Indian lender catalogue from backend/data/raw/lenders.csv.
-These are real Indian banks/NBFCs — no demo/sample/fake entries.
+These are real Indian banks/NBFCs  -  no demo/sample/fake entries.
 
 Run standalone: python seed/seed_lenders.py
 """

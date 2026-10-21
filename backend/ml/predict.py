@@ -1,7 +1,7 @@
 """
 ml/predict.py
 --------------
-Unified prediction interface — convenience wrapper used by tests and
+Unified prediction interface  -  convenience wrapper used by tests and
 external callers that want both models in one import.
 
 Usage:

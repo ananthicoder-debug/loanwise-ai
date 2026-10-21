@@ -30,7 +30,7 @@ REPORTS_DIR = BASE_DIR.parent / "data" / "reports"
 MODELS_DIR  = BASE_DIR / "models"
 
 
-# ─── Validation ───────────────────────────────────────────────────────────────
+# ??? Validation ???????????????????????????????????????????????????????????????
 
 REQUIRED_CSV_FILES = [
     "eligibility_dataset.csv",
@@ -65,9 +65,9 @@ def validate_files():
         if not path.exists():
             missing.append(str(path))
         else:
-            print(f"    ✅ {fname}")
+            print(f"    ? {fname}")
     if missing:
-        print("\n❌ FATAL: Missing required files:")
+        print("\n? FATAL: Missing required files:")
         for m in missing:
             print(f"   {m}")
         sys.exit(1)
@@ -84,9 +84,9 @@ def validate_schemas():
         if missing_cols:
             errors.append(f"{fname} is missing columns: {missing_cols}")
         else:
-            print(f"    ✅ {fname}: schema OK ({len(df.columns)} columns)")
+            print(f"    ? {fname}: schema OK ({len(df.columns)} columns)")
     if errors:
-        print("\n❌ Schema errors:")
+        print("\n? Schema errors:")
         for e in errors:
             print(f"   {e}")
         sys.exit(1)
@@ -102,72 +102,72 @@ def data_quality_check():
         dupes   = int(df.duplicated().sum())
         print(f"    {fname}: {rows} rows | {missing} missing values | {dupes} duplicates")
         if rows < 100:
-            print(f"    ⚠️  WARNING: {fname} has only {rows} records — model may underfit.")
+            print(f"    ??  WARNING: {fname} has only {rows} records  -  model may underfit.")
         if missing > rows * 0.1:
-            print(f"    ⚠️  WARNING: {fname} has high missing rate ({missing/rows*100:.1f}%).")
+            print(f"    ??  WARNING: {fname} has high missing rate ({missing/rows*100:.1f}%).")
     print("    Data quality check complete.")
 
 
-# ─── Training ─────────────────────────────────────────────────────────────────
+# ??? Training ?????????????????????????????????????????????????????????????????
 
 def train_model_1():
     print("\n" + "=" * 60)
-    print("[4] Training Model 1 — Loan Eligibility Prediction")
+    print("[4] Training Model 1  -  Loan Eligibility Prediction")
     print("=" * 60)
     sys.path.insert(0, str(BASE_DIR))
     sys.path.insert(0, str(BASE_DIR.parent))
     from train_eligibility import train as train_elig
     try:
         acc, f1, roc = train_elig()
-        print(f"\n    ✅ Model 1 trained: Acc={acc:.4f}  F1={f1:.4f}  ROC-AUC={roc:.4f}")
+        print(f"\n    ? Model 1 trained: Acc={acc:.4f}  F1={f1:.4f}  ROC-AUC={roc:.4f}")
         return {"status": "success", "accuracy": acc, "f1": f1, "roc_auc": roc}
     except Exception as e:
-        print(f"\n    ❌ Model 1 training FAILED: {e}")
+        print(f"\n    ? Model 1 training FAILED: {e}")
         return {"status": "failed", "error": str(e)}
 
 
 def train_model_2():
     print("\n" + "=" * 60)
-    print("[5] Training Model 2 — Loan Affordability & Repayment Feasibility")
+    print("[5] Training Model 2  -  Loan Affordability & Repayment Feasibility")
     print("=" * 60)
     from train_affordability import train as train_aff
     try:
         acc, f1, roc = train_aff()
-        print(f"\n    ✅ Model 2 trained: Acc={acc:.4f}  F1={f1:.4f}  ROC-AUC={roc:.4f}")
+        print(f"\n    ? Model 2 trained: Acc={acc:.4f}  F1={f1:.4f}  ROC-AUC={roc:.4f}")
         return {"status": "success", "accuracy": acc, "f1": f1, "roc_auc": roc}
     except Exception as e:
-        print(f"\n    ❌ Model 2 training FAILED: {e}")
+        print(f"\n    ? Model 2 training FAILED: {e}")
         return {"status": "failed", "error": str(e)}
 
 
-# ─── Summary ──────────────────────────────────────────────────────────────────
+# ??? Summary ??????????????????????????????????????????????????????????????????
 
 def print_summary(m1_result, m2_result):
     print("\n" + "=" * 60)
     print("  TRAINING SUMMARY")
     print("=" * 60)
     for label, res, fname in [
-        ("Model 1 — Eligibility",    m1_result, "eligibility_model.joblib"),
-        ("Model 2 — Affordability",  m2_result, "affordability_model.joblib"),
+        ("Model 1  -  Eligibility",    m1_result, "eligibility_model.joblib"),
+        ("Model 2  -  Affordability",  m2_result, "affordability_model.joblib"),
     ]:
         status = res.get("status", "unknown")
         if status == "success":
             print(f"  {label}")
-            print(f"    Status:   ✅ Trained successfully")
+            print(f"    Status:   ? Trained successfully")
             print(f"    Accuracy: {res.get('accuracy', 0):.4f}")
             print(f"    F1 Score: {res.get('f1', 0):.4f}")
             print(f"    ROC-AUC:  {res.get('roc_auc', 0):.4f}")
             print(f"    Saved:    ml/models/{fname}")
         else:
             print(f"  {label}")
-            print(f"    Status: ❌ FAILED — {res.get('error', 'unknown error')}")
+            print(f"    Status: ? FAILED  -  {res.get('error', 'unknown error')}")
     print("=" * 60)
     print("\n  COMMANDS TO RETRAIN:")
     print("    python ml/train_eligibility.py")
     print("    python ml/train_affordability.py")
     print("    python ml/train_all_models.py")
     print("\n  NOTICE:")
-    print("    AI model outputs are estimates — not guaranteed lender decisions.")
+    print("    AI model outputs are estimates  -  not guaranteed lender decisions.")
     print("    Always verify eligibility directly with the lender.")
     print("=" * 60)
 
@@ -181,18 +181,18 @@ def print_summary(m1_result, m2_result):
             "model_1": "data/raw/eligibility_dataset.csv",
             "model_2": "data/raw/affordability_dataset.csv",
         },
-        "note": "AI model outputs are estimates — not guaranteed lender approvals.",
+        "note": "AI model outputs are estimates  -  not guaranteed lender approvals.",
     }
     with open(REPORTS_DIR / "training_summary.json", "w") as f:
         json.dump(summary, f, indent=2)
     print(f"\n  Summary saved -> data/reports/training_summary.json")
 
 
-# ─── Entry point ──────────────────────────────────────────────────────────────
+# ??? Entry point ??????????????????????????????????????????????????????????????
 
 def main():
     print("\n" + "=" * 60)
-    print("  LoanWise AI — ML Training Pipeline")
+    print("  LoanWise AI  -  ML Training Pipeline")
     print(f"  Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
@@ -206,9 +206,9 @@ def main():
     print_summary(m1, m2)
 
     if m1.get("status") != "success" or m2.get("status") != "success":
-        print("\n⚠️  One or more models failed. Check errors above.")
+        print("\n??  One or more models failed. Check errors above.")
         sys.exit(1)
-    print("\n✅ Both models trained successfully.\n")
+    print("\n? Both models trained successfully.\n")
 
 
 if __name__ == "__main__":

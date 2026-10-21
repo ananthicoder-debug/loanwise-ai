@@ -2,7 +2,7 @@
 database/mongodb.py
 --------------------
 Purpose:
-    Shared MongoDB connection for LoanWise AI — all routes/services import
+    Shared MongoDB connection for LoanWise AI  -  all routes/services import
     `collections` and `db` from here. One client per process, never per request.
 
     Supports both:
@@ -29,7 +29,7 @@ _conn_label = "MongoDB Atlas" if IS_ATLAS else "Local MongoDB"
 # Atlas connections need a longer timeout; local can stay short
 _timeout_ms = 20000 if IS_ATLAS else 5000
 
-# Build client kwargs — add TLS settings for Atlas to avoid SSL handshake issues
+# Build client kwargs  -  add TLS settings for Atlas to avoid SSL handshake issues
 # on certain Linux environments (e.g. Render free tier)
 _client_kwargs: dict = {"serverSelectionTimeoutMS": _timeout_ms}
 

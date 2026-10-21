@@ -29,7 +29,7 @@ def load_saved_metrics():
             with open(path) as f:
                 results[fname] = json.load(f)
         else:
-            results[fname] = {"error": f"{fname} not found — run training first."}
+            results[fname] = {"error": f"{fname} not found  -  run training first."}
     return results
 
 
@@ -44,7 +44,7 @@ def run_scenario_predictions():
 
     scenarios = [
         {
-            "label": "S1 — Low EMI, sufficient income",
+            "label": "S1  -  Low EMI, sufficient income",
             "credit": {"monthly_income": 80000, "annual_income": 960000, "cibil_score": 750,
                        "existing_loans": 0, "existing_emi": 2000, "outstanding_debt": 50000,
                        "dependents": 1, "employment_type": "Salaried", "education": "Graduate",
@@ -52,7 +52,7 @@ def run_scenario_predictions():
             "app":    {"loan_amount": 300000, "loan_tenure": 36, "loan_category": "Personal Loan"},
         },
         {
-            "label": "S2 — High existing EMI",
+            "label": "S2  -  High existing EMI",
             "credit": {"monthly_income": 40000, "annual_income": 480000, "cibil_score": 700,
                        "existing_loans": 3, "existing_emi": 25000, "outstanding_debt": 300000,
                        "dependents": 2, "employment_type": "Salaried", "education": "Graduate",
@@ -60,7 +60,7 @@ def run_scenario_predictions():
             "app":    {"loan_amount": 200000, "loan_tenure": 24, "loan_category": "Personal Loan"},
         },
         {
-            "label": "S3 — High outstanding debt",
+            "label": "S3  -  High outstanding debt",
             "credit": {"monthly_income": 50000, "annual_income": 600000, "cibil_score": 680,
                        "existing_loans": 2, "existing_emi": 10000, "outstanding_debt": 1500000,
                        "dependents": 2, "employment_type": "Self-Employed", "education": "Graduate",
@@ -68,7 +68,7 @@ def run_scenario_predictions():
             "app":    {"loan_amount": 500000, "loan_tenure": 60, "loan_category": "Personal Loan"},
         },
         {
-            "label": "S4 — Very large requested loan",
+            "label": "S4  -  Very large requested loan",
             "credit": {"monthly_income": 60000, "annual_income": 720000, "cibil_score": 720,
                        "existing_loans": 1, "existing_emi": 5000, "outstanding_debt": 200000,
                        "dependents": 0, "employment_type": "Salaried", "education": "Graduate",
@@ -76,7 +76,7 @@ def run_scenario_predictions():
             "app":    {"loan_amount": 5000000, "loan_tenure": 240, "loan_category": "Home Loan"},
         },
         {
-            "label": "S5 — Historical late payments",
+            "label": "S5  -  Historical late payments",
             "credit": {"monthly_income": 55000, "annual_income": 660000, "cibil_score": 650,
                        "existing_loans": 1, "existing_emi": 8000, "outstanding_debt": 150000,
                        "dependents": 2, "employment_type": "Salaried", "education": "Graduate",
@@ -84,7 +84,7 @@ def run_scenario_predictions():
             "app":    {"loan_amount": 300000, "loan_tenure": 36, "loan_category": "Personal Loan"},
         },
         {
-            "label": "S6 — Missed payments",
+            "label": "S6  -  Missed payments",
             "credit": {"monthly_income": 45000, "annual_income": 540000, "cibil_score": 620,
                        "existing_loans": 2, "existing_emi": 12000, "outstanding_debt": 200000,
                        "dependents": 3, "employment_type": "Self-Employed", "education": "Not Graduate",
@@ -92,7 +92,7 @@ def run_scenario_predictions():
             "app":    {"loan_amount": 250000, "loan_tenure": 24, "loan_category": "Personal Loan"},
         },
         {
-            "label": "S7 — No historical data",
+            "label": "S7  -  No historical data",
             "credit": {"monthly_income": 35000, "annual_income": 420000, "cibil_score": 700,
                        "existing_loans": 0, "existing_emi": 0, "outstanding_debt": 0,
                        "dependents": 0, "employment_type": "Salaried", "education": "Graduate",
@@ -100,7 +100,7 @@ def run_scenario_predictions():
             "app":    {"loan_amount": 100000, "loan_tenure": 12, "loan_category": "Personal Loan"},
         },
         {
-            "label": "S8 — Missing income (zero income edge case)",
+            "label": "S8  -  Missing income (zero income edge case)",
             "credit": {"monthly_income": 0, "annual_income": 0, "cibil_score": 650,
                        "existing_loans": 0, "existing_emi": 0, "outstanding_debt": 0,
                        "dependents": 0, "employment_type": "Salaried", "education": "Graduate",
@@ -108,7 +108,7 @@ def run_scenario_predictions():
             "app":    {"loan_amount": 100000, "loan_tenure": 12, "loan_category": "Personal Loan"},
         },
         {
-            "label": "S9 — Eligible but Not Manageable (high EMI ratio)",
+            "label": "S9  -  Eligible but Not Manageable (high EMI ratio)",
             "credit": {"monthly_income": 30000, "annual_income": 360000, "cibil_score": 750,
                        "existing_loans": 3, "existing_emi": 20000, "outstanding_debt": 500000,
                        "dependents": 2, "employment_type": "Salaried", "education": "Graduate",
@@ -116,7 +116,7 @@ def run_scenario_predictions():
             "app":    {"loan_amount": 400000, "loan_tenure": 24, "loan_category": "Personal Loan"},
         },
         {
-            "label": "S10 — Eligible and Manageable (ideal profile)",
+            "label": "S10  -  Eligible and Manageable (ideal profile)",
             "credit": {"monthly_income": 100000, "annual_income": 1200000, "cibil_score": 800,
                        "existing_loans": 0, "existing_emi": 0, "outstanding_debt": 0,
                        "dependents": 0, "employment_type": "Salaried", "education": "Graduate",
@@ -155,7 +155,7 @@ def run_scenario_predictions():
 
 def main():
     print("\n" + "=" * 60)
-    print("  LoanWise AI — Model Evaluation Report")
+    print("  LoanWise AI  -  Model Evaluation Report")
     print("=" * 60)
 
     metrics = load_saved_metrics()
@@ -163,15 +163,15 @@ def main():
         if "error" not in data:
             mp = data.get("model_performance", {})
             print(f"\n  {data.get('dataset', fname)}")
-            print(f"    Algorithm:  {mp.get('algorithm', '—')}")
-            print(f"    Records:    {data.get('total_records', '—')} total ({data.get('training_records', '—')} train / {data.get('testing_records', '—')} test)")
-            print(f"    Target:     {data.get('target_column', '—')}")
-            print(f"    Accuracy:   {mp.get('accuracy', '—')}")
-            print(f"    F1 Score:   {mp.get('f1_score', '—')}")
-            print(f"    ROC-AUC:    {mp.get('roc_auc', '—')}")
+            print(f"    Algorithm:  {mp.get('algorithm', ' - ')}")
+            print(f"    Records:    {data.get('total_records', ' - ')} total ({data.get('training_records', ' - ')} train / {data.get('testing_records', ' - ')} test)")
+            print(f"    Target:     {data.get('target_column', ' - ')}")
+            print(f"    Accuracy:   {mp.get('accuracy', ' - ')}")
+            print(f"    F1 Score:   {mp.get('f1_score', ' - ')}")
+            print(f"    ROC-AUC:    {mp.get('roc_auc', ' - ')}")
             print(f"    Disclaimer: {data.get('disclaimer', '')}")
         else:
-            print(f"\n  ⚠️  {data['error']}")
+            print(f"\n  ??  {data['error']}")
 
     run_scenario_predictions()
     print("\n  Evaluation complete.\n")

@@ -3,7 +3,7 @@ services/explainability_service.py
 ------------------------------------
 Generates model explanations using permutation feature importance
 (scipy/sklearn) and the trained model's coefficient / feature_importance_
-arrays. No SHAP required — the LogisticRegression coefficients give us
+arrays. No SHAP required  -  the LogisticRegression coefficients give us
 directional importance without additional dependencies.
 
 For each model, returns:
@@ -24,7 +24,7 @@ SCALER1_PATH = BASE_DIR / "ml" / "models" / "eligibility_preprocessor.joblib"
 SCALER2_PATH = BASE_DIR / "ml" / "models" / "affordability_preprocessor.joblib"
 
 
-# ─── Descriptions for human-readable output ──────────────────────────────────
+# ??? Descriptions for human-readable output ??????????????????????????????????
 
 ELIGIBILITY_DESCRIPTIONS = {
     "age":             "Applicant age in years",
@@ -32,7 +32,7 @@ ELIGIBILITY_DESCRIPTIONS = {
     "employment_enc":  "Employment type (Salaried=0, Self-Employed=1, Business=2)",
     "annual_income":   "Declared annual income (INR)",
     "dependents":      "Number of financial dependents",
-    "cibil_score":     "Credit Information Bureau (India) Limited score (300–900)",
+    "cibil_score":     "Credit Information Bureau (India) Limited score (300-900)",
     "existing_loans":  "Number of currently active loan obligations",
     "outstanding_debt":"Total outstanding debt principal (INR)",
     "loan_amount":     "Requested loan principal (INR)",
@@ -55,7 +55,7 @@ AFFORDABILITY_DESCRIPTIONS = {
     "emi_income_ratio": "Ratio of total EMI to monthly income (decimal)",
 }
 
-# ─── Helpers ─────────────────────────────────────────────────────────────────
+# ??? Helpers ?????????????????????????????????????????????????????????????????
 
 def _load_bundle(path, scaler_path):
     try:
@@ -84,7 +84,7 @@ def _strength_label(abs_val: float) -> str:
     return "Weak"
 
 
-# ─── Model 1 explainability ───────────────────────────────────────────────────
+# ??? Model 1 explainability ???????????????????????????????????????????????????
 
 def explain_eligibility(feature_values: list, feature_names: list) -> dict:
     """
@@ -148,7 +148,7 @@ def explain_eligibility(feature_values: list, feature_names: list) -> dict:
     }
 
 
-# ─── Model 2 explainability ───────────────────────────────────────────────────
+# ??? Model 2 explainability ???????????????????????????????????????????????????
 
 def explain_affordability(feature_values: list, feature_names: list) -> dict:
     """
@@ -208,7 +208,7 @@ def explain_affordability(feature_values: list, feature_names: list) -> dict:
     }
 
 
-# ─── Historical repayment analysis ───────────────────────────────────────────
+# ??? Historical repayment analysis ???????????????????????????????????????????
 
 def analyse_repayment_history(credit_profile: dict) -> dict:
     """
@@ -238,7 +238,7 @@ def analyse_repayment_history(credit_profile: dict) -> dict:
         summary = "No historical loan records available in profile."
         quality = "neutral"
     elif missed == 0 and late == 0:
-        summary = "Payment history appears clean — no missed or late payments on record."
+        summary = "Payment history appears clean  -  no missed or late payments on record."
         quality = "positive"
     elif missed > 0:
         summary = f"{missed} missed payment(s) and {late} late payment(s) noted."

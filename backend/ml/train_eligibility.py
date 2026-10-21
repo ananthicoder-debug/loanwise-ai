@@ -5,7 +5,7 @@ Trains Model 1 using data/raw/eligibility_dataset.csv (5000 records).
 Target: loan_status (0=Not Eligible, 1=Eligible).
 
 NOTE: This script saves everything to .joblib and .json files ONLY.
-      It never calls MongoDB — that avoids the SSL handshake error
+      It never calls MongoDB  -  that avoids the SSL handshake error
       in Render's build container.
       FastAPI startup (main.py) syncs the JSON metrics to Atlas.
 """
@@ -127,7 +127,7 @@ def train():
         for feat, imp in fi_sorted:
             print(f"    {feat:<30} {imp:.4f}")
 
-    # ── Save model artifacts ──────────────────────────────────────────────────
+    # ?? Save model artifacts ??????????????????????????????????????????????????
     MODEL_OUT.parent.mkdir(parents=True, exist_ok=True)
     bundle = {
         "model": best_model, "features": ELIGIBILITY_FEATURES,
@@ -139,7 +139,7 @@ def train():
     joblib.dump(scaler, SCALER_OUT)
     print(f"\nSaved: {MODEL_OUT}")
 
-    # ── Save ALL metrics to JSON (no MongoDB call here) ───────────────────────
+    # ?? Save ALL metrics to JSON (no MongoDB call here) ???????????????????????
     REPORTS.mkdir(parents=True, exist_ok=True)
 
     analysis = {
@@ -169,7 +169,7 @@ def train():
             "confusion_matrix": cm,
         },
         "feature_importance": {k: round(float(v), 6) for k, v in fi_sorted[:10]},
-        "disclaimer": "Trained on borrower profile data. AI output is an estimate — not a lender decision.",
+        "disclaimer": "Trained on borrower profile data. AI output is an estimate  -  not a lender decision.",
         "generated_at": datetime.now().isoformat(),
     }
     with open(REPORTS / "eligibility_analysis.json", "w") as f:

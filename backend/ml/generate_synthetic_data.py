@@ -30,7 +30,7 @@ np.random.seed(RANDOM_SEED)
 OUTPUT_DIR = Path(__file__).parent.parent / "data" / "raw"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# ── Indian demographic constants ───────────────────────────────
+# ?? Indian demographic constants ???????????????????????????????
 STATES = ["Maharashtra","Tamil Nadu","Karnataka","Delhi","Telangana","Gujarat",
           "Rajasthan","Uttar Pradesh","West Bengal","Kerala","Madhya Pradesh",
           "Punjab","Haryana","Bihar","Andhra Pradesh"]
@@ -85,7 +85,7 @@ TENURE_RANGES = {
     "Consumer Durable Loan":(6, 36),
 }
 
-# ── Helper functions ────────────────────────────────────────────
+# ?? Helper functions ????????????????????????????????????????????
 def clamp(val, lo, hi): return max(lo, min(hi, val))
 
 def emi_calc(P, r_annual_pct, n_months):
@@ -93,7 +93,7 @@ def emi_calc(P, r_annual_pct, n_months):
     if r == 0: return round(P / n_months, 2)
     return round(P * r * (1+r)**n_months / ((1+r)**n_months - 1), 2)
 
-# ── Record generator ─────────────────────────────────────────────
+# ?? Record generator ?????????????????????????????????????????????
 def generate_record(idx):
     # Demographics
     age = int(np.random.normal(35, 10))
@@ -162,7 +162,7 @@ def generate_record(idx):
     proposed_emi = emi_calc(requested_amount, test_rate, tenure)
     eti = round((existing_emi + proposed_emi) / (monthly_income + 1), 4)
 
-    # ── Eligibility target (Model 1) ──────────────────────────────
+    # ?? Eligibility target (Model 1) ??????????????????????????????
     eligibility_score = 0
     eligibility_score += 25 if cibil >= 750 else (15 if cibil >= 700 else (5 if cibil >= 650 else -10))
     eligibility_score += 20 if annual_income >= requested_amount * 0.25 else (10 if annual_income >= requested_amount * 0.15 else -5)
@@ -176,7 +176,7 @@ def generate_record(idx):
     eligibility_prob = 1 / (1 + math.exp(-eligibility_score / 20))
     eligibility_target = "Eligible" if eligibility_prob > 0.5 else "Not_Eligible"
 
-    # ── Affordability target (Model 2) ────────────────────────────
+    # ?? Affordability target (Model 2) ????????????????????????????
     afford_score = 0.9
     afford_score -= eti * 1.5
     afford_score -= (outstanding_debt / (annual_income + 1)) * 0.5
@@ -235,15 +235,15 @@ def run():
     records = [generate_record(i+1) for i in range(N_RECORDS)]
     df = pd.DataFrame(records)
 
-    # ── Data quality summary ──────────────────────────────────────
+    # ?? Data quality summary ??????????????????????????????????????
     print(f"\n{'='*50}")
     print(f"DATASET VALIDATION SUMMARY")
     print(f"{'='*50}")
     print(f"Total records:       {len(df)}")
     print(f"Missing values:      {df.isnull().sum().sum()}")
     print(f"Duplicate IDs:       {df['Applicant_ID'].duplicated().sum()}")
-    print(f"Income range:        Rs.{df['Monthly_Income'].min():,.0f} – Rs.{df['Monthly_Income'].max():,.0f}/month")
-    print(f"CIBIL range:         {df['CIBIL_Score'].min()} – {df['CIBIL_Score'].max()}")
+    print(f"Income range:        Rs.{df['Monthly_Income'].min():,.0f} - Rs.{df['Monthly_Income'].max():,.0f}/month")
+    print(f"CIBIL range:         {df['CIBIL_Score'].min()} - {df['CIBIL_Score'].max()}")
     print(f"Avg income:          Rs.{df['Monthly_Income'].mean():,.0f}/month")
     print(f"Avg loan amount:     Rs.{df['Requested_Loan_Amount'].mean():,.0f}")
     elig_dist = df['Eligibility_Target'].value_counts()
@@ -251,7 +251,7 @@ def run():
     print(f"Eligibility:         Eligible={elig_dist.get('Eligible',0)} | Not_Eligible={elig_dist.get('Not_Eligible',0)}")
     print(f"Affordability:       Manageable={afford_dist.get('Manageable',0)} | Not_Manageable={afford_dist.get('Not_Manageable',0)}")
 
-    # ── Save separate training datasets ──────────────────────────
+    # ?? Save separate training datasets ??????????????????????????
     eligibility_cols = [
         "Applicant_ID","Age","Education","Employment_Type","Employer_Category",
         "Years_of_Employment","Monthly_Income","Annual_Income","Number_of_Dependents",

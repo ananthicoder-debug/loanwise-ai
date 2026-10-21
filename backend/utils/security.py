@@ -21,7 +21,7 @@ Why bcrypt + JWT:
 
 import os
 import warnings
-# Suppress passlib/bcrypt version detection warning (cosmetic only — auth works correctly)
+# Suppress passlib/bcrypt version detection warning (cosmetic only  -  auth works correctly)
 warnings.filterwarnings("ignore", ".*error reading bcrypt version.*")
 warnings.filterwarnings("ignore", ".*trapped.*")
 from datetime import datetime, timedelta, timezone

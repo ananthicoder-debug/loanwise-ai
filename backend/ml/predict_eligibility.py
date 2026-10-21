@@ -28,7 +28,7 @@ try:
         _scaler = joblib.load(SCALER_PATH)
         # Check if the loaded model has the updated feature set
         if len(_bundle.get("features", [])) != len(ELIGIBILITY_FEATURES):
-            print("[Model 1] Feature count mismatch — retrain recommended. Using rule-based fallback.")
+            print("[Model 1] Feature count mismatch  -  retrain recommended. Using rule-based fallback.")
             _bundle = None
 except Exception as e:
     print(f"[Model 1] Failed to load: {e}. Using rule-based fallback.")

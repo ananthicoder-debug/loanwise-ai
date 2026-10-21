@@ -37,7 +37,7 @@ def seed_system_metadata():
         "borrower_dataset_version": "india_v2",
         "historical_dataset_version": "repayment_v2",
         "updated_at": "2026-09-23",
-        "description": "LoanWise AI — Verified Indian Loan Product Catalogue v2.0",
+        "description": "LoanWise AI  -  Verified Indian Loan Product Catalogue v2.0",
     })
     print("System metadata: version 2.0 written.")
 
@@ -61,7 +61,7 @@ def build_demo_journey():
 
     primary_user = collections["users"].find_one({"email": "anantha@example.com"})
     if not primary_user:
-        print("Primary demo user not found — skipping demo journey.")
+        print("Primary demo user not found  -  skipping demo journey.")
         return
 
     # Create a Personal Loan application
@@ -89,7 +89,7 @@ def build_demo_journey():
 
     recommended = evaluation.get("recommended_products", [])
     if not recommended:
-        print("No recommended products for demo profile — skipping active loan.")
+        print("No recommended products for demo profile  -  skipping active loan.")
         return
 
     chosen = recommended[0]
@@ -200,7 +200,7 @@ def build_demo_journey():
 
 def main():
     print("=" * 60)
-    print("LoanWise AI — Database Setup")
+    print("LoanWise AI  -  Database Setup")
     print("Database: loan_ai_system")
     print("=" * 60)
 
@@ -209,7 +209,7 @@ def main():
     if not check_connection():
         print(f"[ERROR] Cannot connect to {_conn_label}.")
         print("  For Atlas: ensure IP is whitelisted and credentials are correct.")
-        print("  Skipping seed — app will start without demo data.")
+        print("  Skipping seed  -  app will start without demo data.")
         return
 
     seed_lenders()

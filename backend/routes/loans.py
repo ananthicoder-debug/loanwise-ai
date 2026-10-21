@@ -1,7 +1,7 @@
 """
 routes/loans.py
 -----------------
-GET /api/loans                    -> browse full catalogue grouped by category → lender
+GET /api/loans                    -> browse full catalogue grouped by category -> lender
 GET /api/loans/categories         -> category list with product + lender counts
 GET /api/loans/lenders            -> lender list with product counts
 GET /api/loans/lenders/{id}       -> single lender detail + their products
@@ -9,7 +9,7 @@ GET /api/loans/search?q=          -> search across product/lender/category
 GET /api/loans/compare?ids=       -> compare 2-4 products side by side
 GET /api/loans/{id}               -> single product full detail
 
-All counts come from MongoDB aggregation — never hardcoded.
+All counts come from MongoDB aggregation  -  never hardcoded.
 """
 
 from bson import ObjectId

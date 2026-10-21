@@ -1,4 +1,4 @@
-"""models/user.py — Pydantic request/response schemas for users."""
+"""models/user.py  -  Pydantic request/response schemas for users."""
 
 from pydantic import BaseModel, EmailStr
 from typing import Optional

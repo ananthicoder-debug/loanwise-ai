@@ -12,10 +12,10 @@ affordability_dataset.csv columns (target=manageable):
   previous_loans, missed_payments, late_payments, proposed_amount,
   proposed_rate, proposed_tenure, proposed_emi, emi_income_ratio
 
-borrowers.csv has 42 columns — used for applicant profile & rich feature mapping.
+borrowers.csv has 42 columns  -  used for applicant profile & rich feature mapping.
 """
 
-# ─── Encoding maps (match actual CSV values exactly) ─────────────────────────
+# ??? Encoding maps (match actual CSV values exactly) ?????????????????????????
 
 EMPLOYMENT_MAP = {
     # eligibility_dataset.csv values
@@ -61,7 +61,7 @@ REPAYMENT_STATUS_MAP = {
     "Bad":       4,
 }
 
-# ─── Model 1: Eligibility features (exact match to eligibility_dataset.csv) ──
+# ??? Model 1: Eligibility features (exact match to eligibility_dataset.csv) ??
 
 ELIGIBILITY_FEATURES = [
     "age",
@@ -76,7 +76,7 @@ ELIGIBILITY_FEATURES = [
     "loan_tenure",
 ]
 
-# ─── Model 2: Affordability features (exact match to affordability_dataset.csv)
+# ??? Model 2: Affordability features (exact match to affordability_dataset.csv)
 
 AFFORDABILITY_FEATURES = [
     "monthly_income",
@@ -104,7 +104,7 @@ def build_eligibility_vector(credit_profile: dict, application: dict) -> list:
     emp = (credit_profile.get("employment_type") or
            credit_profile.get("Employment_Type") or "Salaried")
 
-    # annual_income — accept monthly * 12 fallback
+    # annual_income  -  accept monthly * 12 fallback
     annual = (credit_profile.get("annual_income") or
               credit_profile.get("Annual_Income") or
               (credit_profile.get("monthly_income", 0) * 12) or 0)

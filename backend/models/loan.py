@@ -1,4 +1,4 @@
-"""models/loan.py — Pydantic schemas for loan-related requests."""
+"""models/loan.py  -  Pydantic schemas for loan-related requests."""
 
 from pydantic import BaseModel
 from typing import Optional, List
