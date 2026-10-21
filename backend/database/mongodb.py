@@ -35,10 +35,11 @@ _client_kwargs: dict = {"serverSelectionTimeoutMS": _timeout_ms}
 
 if IS_ATLAS:
     _client_kwargs.update({
-        "tls":               True,
-        "tlsAllowInvalidCertificates": False,
-        "retryWrites":       True,
-        "w":                 "majority",
+        "tls":                         True,
+        "tlsAllowInvalidCertificates": True,   # Required for Render free tier OpenSSL
+        "tlsAllowInvalidHostnames":    False,
+        "retryWrites":                 True,
+        "w":                           "majority",
     })
 
 client = MongoClient(MONGODB_URI, **_client_kwargs)
