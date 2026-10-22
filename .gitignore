@@ -9,11 +9,9 @@ venv/
 *.egg-info/
 
 # ── Credentials — NEVER commit ────────────────────────────────
-backend/.env
-backend/.env.production
-backend/.env.local
-backend/.env.backup
-!backend/.env.example
+**/.env
+**/.env.*
+!**/.env.example
 
 # ── Uploaded user files ───────────────────────────────────────
 backend/uploads/

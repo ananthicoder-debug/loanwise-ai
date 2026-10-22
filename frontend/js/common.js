@@ -18,16 +18,24 @@ function checkBackendConnection() {
       if (data.mongodb === "disconnected") {
         const el = document.getElementById("backendAlert");
         if (el) el.innerHTML = `<div class="alert alert-warning alert-dismissible fade show small mb-0" role="alert">
-          ⚠️ Database connection issue. Some features may not work. Start MongoDB and restart the backend.
+          ⚠️ Database connection issue. In MongoDB Atlas, ensure Network Access allows 0.0.0.0/0.
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
       }
     })
     .catch(() => {
       const el = document.getElementById("backendAlert");
-      if (el) el.innerHTML = `<div class="alert alert-danger alert-dismissible fade show small mb-0" role="alert">
-        🔴 Cannot reach the backend server at <strong>http://localhost:8000</strong>.
-        Please run <strong>START_LOANWISE.bat</strong> and wait for it to start, then refresh this page.
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
+      const isLocal = API_BASE_URL.includes("localhost") || API_BASE_URL.includes("127.0.0.1");
+      if (el) {
+        if (isLocal) {
+          el.innerHTML = `<div class="alert alert-danger alert-dismissible fade show small mb-0" role="alert">
+            🔴 Cannot reach backend at <strong>${API_BASE_URL}</strong>. Run <strong>START_LOANWISE.bat</strong> and refresh.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
+        } else {
+          el.innerHTML = `<div class="alert alert-warning alert-dismissible fade show small mb-0" role="alert">
+            🔄 Cloud backend at <strong>${API_BASE_URL}</strong> is waking up from sleep. Please wait ~30s and refresh.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
+        }
+      }
     });
 }
 
@@ -73,9 +81,10 @@ function laAjax(method, path, data) {
         window.location.href = "login.html";
         return;
       }
-      let message = "Unable to connect to the backend server. Make sure START_LOANWISE.bat is running.";
+      const isLocal = API_BASE_URL.includes("localhost") || API_BASE_URL.includes("127.0.0.1");
+      let message = isLocal ? "Unable to connect to backend server. Make sure START_LOANWISE.bat is running." : "Unable to reach the cloud server. Render free tier takes ~30-45s to wake up on first visit. Please retry.";
       if (xhr.status === 0) {
-        message = "Cannot reach the backend at http://localhost:8000. Please start the backend server using START_LOANWISE.bat and refresh.";
+        message = isLocal ? "Cannot reach the backend at " + API_BASE_URL + ". Please ensure START_LOANWISE.bat is running." : "Connecting to backend at " + API_BASE_URL + ". Cloud instance is waking up. Please retry in a few seconds.";
       } else if (xhr.responseJSON && xhr.responseJSON.detail) {
         message = typeof xhr.responseJSON.detail === "string"
           ? xhr.responseJSON.detail

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Loan Details — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="lw-layout">
+  <div id="sidebarOverlay" class="lw-sidebar-overlay"></div>
+  <aside id="lwSidebar" class="lw-sidebar"></aside>
+  <div class="lw-main">
+    <header id="lwTopbar" class="lw-topbar"></header>
+    <main class="lw-page-content">
+      <div class="lw-breadcrumb"><a href="dashboard.html">Dashboard</a> / <a href="eligible-loans.html">Eligible Loans</a> / Product Details</div>
+      <div id="detailAlert"></div>
+      <div id="productDetailContent">
+        <div class="text-center py-5 text-muted"><span class="spinner-border spinner-la"></span> Loading product details...</div>
+      </div>
+    </main>
+    <footer class="la-footer text-center"><div class="container"><p class="mb-0 small">LoanWise AI — Verified product information. Model-generated eligibility estimates are not guaranteed approvals.</p></div></footer>
+  </div>
+</div>
+
+<!-- Select Loan Modal -->
+<div class="modal fade" id="selectLoanModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Create Active Loan</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <div id="modalAlert"></div>
+        <p class="small text-muted mb-3">Confirm the loan details. This creates an active loan entry and generates your EMI schedule.</p>
+        <div class="row g-3">
+          <div class="col-6">
+            <label class="form-label">Loan Amount (₹)</label>
+            <input type="number" class="form-control" id="modalAmount">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Interest Rate (%)</label>
+            <input type="number" class="form-control" id="modalRate" step="0.01">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Tenure (Months)</label>
+            <input type="number" class="form-control" id="modalTenure">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="modalStartDate">
+          </div>
+          <div class="col-12">
+            <label class="form-label">First EMI Due Date</label>
+            <input type="date" class="form-control" id="modalFirstDue">
+          </div>
+        </div>
+        <div class="mt-3 p-3 bg-light rounded">
+          <div class="small text-muted">Estimated Monthly EMI</div>
+          <div class="fw-bold fs-4 text-primary-la" id="modalEmiPreview">—</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-la-primary" id="confirmLoanBtn">Create Active Loan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/active-loans.js"></script>
+<script>$(function(){ initLoanDetailsPage(); });</script>
+</body>
+</html>

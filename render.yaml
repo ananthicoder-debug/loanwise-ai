@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: loanwise-ai-backend
+    env: python
+    region: singapore
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://ananthavalliuofficial_db_user:nraXeFPEfhtvTuxC@cluster0.ckt9xiq.mongodb.net/loan_ai_system?retryWrites=true&w=majority&appName=Cluster0
+      - key: DATABASE_NAME
+        value: loan_ai_system
+      - key: JWT_SECRET
+        value: loanwise_ai_jwt_secret_ananthavalli_2026_production
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+      - key: APP_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: "3.11.9"

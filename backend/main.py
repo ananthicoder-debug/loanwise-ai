@@ -108,11 +108,58 @@ def health_check():
     }
 
 
-@app.get("/")
-def root():
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse, JSONResponse
+
+# Locate frontend folder
+_BASE_DIR = Path(__file__).resolve().parent
+_FRONTEND_CANDIDATES = [
+    _BASE_DIR / "frontend",
+    _BASE_DIR.parent / "frontend",
+]
+FRONTEND_DIR = next((d for d in _FRONTEND_CANDIDATES if d.exists() and (d / "index.html").exists()), None)
+
+if FRONTEND_DIR:
+    css_path = FRONTEND_DIR / "css"
+    js_path = FRONTEND_DIR / "js"
+    if css_path.exists():
+        app.mount("/css", StaticFiles(directory=str(css_path)), name="css")
+    if js_path.exists():
+        app.mount("/js", StaticFiles(directory=str(js_path)), name="js")
+
+
+@app.get("/api")
+def api_root():
     return {
         "application": "LoanWise AI",
         "version": "2.0.0",
         "description": "Intelligent Indian Loan Eligibility and Recommendation System",
         "docs": "/docs",
     }
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    if FRONTEND_DIR and (FRONTEND_DIR / "index.html").exists():
+        return FileResponse(FRONTEND_DIR / "index.html")
+    return api_root()
+
+
+@app.get("/{path_name:path}", include_in_schema=False)
+def serve_frontend_pages(path_name: str):
+    if not FRONTEND_DIR:
+        return JSONResponse({"detail": "Not found"}, status_code=404)
+    # Never intercept api or swagger docs
+    if path_name.startswith("api") or path_name in ("docs", "redoc", "openapi.json"):
+        return JSONResponse({"detail": "Not found"}, status_code=404)
+
+    target = FRONTEND_DIR / path_name
+    if target.is_file():
+        return FileResponse(target)
+
+    html_target = FRONTEND_DIR / f"{path_name}.html"
+    if html_target.is_file():
+        return FileResponse(html_target)
+
+    return FileResponse(FRONTEND_DIR / "index.html")

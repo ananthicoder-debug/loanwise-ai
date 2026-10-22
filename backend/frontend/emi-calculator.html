@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMI Calculator — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="lw-layout">
+  <div id="sidebarOverlay" class="lw-sidebar-overlay"></div>
+  <aside id="lwSidebar" class="lw-sidebar"></aside>
+  <div class="lw-main">
+    <header id="lwTopbar" class="lw-topbar"></header>
+    <main class="lw-page-content">
+      <div class="lw-breadcrumb"><a href="dashboard.html">Dashboard</a> / EMI Calculator</div>
+      <h1 class="lw-page-title">EMI Calculator</h1>
+      <p class="lw-page-subtitle">Calculate your Equated Monthly Instalment and view full amortisation schedule.</p>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="la-card">
+            <div class="la-card-header">🧮 Calculate EMI</div>
+            <form id="emiForm">
+              <div class="mb-3">
+                <label class="form-label">Loan Amount (₹)</label>
+                <input type="number" class="form-control" id="emiAmount" value="500000" min="1000" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Annual Interest Rate (%)</label>
+                <input type="number" class="form-control" id="emiRate" value="12" step="0.01" min="0.1" max="50" required>
+                <div class="form-text">Enter annual rate. e.g. 12 for 12% p.a.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Tenure (Months)</label>
+                <input type="number" class="form-control" id="emiTenure" value="36" min="1" max="360" required>
+              </div>
+              <button type="submit" class="btn btn-la-primary w-100 py-2">Calculate EMI</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="la-card mb-4" id="emiResultCard" style="display:none">
+            <div class="la-card-header">📊 Results</div>
+            <div class="row g-3">
+              <div class="col-6 col-md-3"><div class="la-stat-card text-center"><div class="stat-value" id="resEMI">—</div><div class="stat-label">Monthly EMI</div></div></div>
+              <div class="col-6 col-md-3"><div class="la-stat-card orange text-center"><div class="stat-value" id="resTotalInterest">—</div><div class="stat-label">Total Interest</div></div></div>
+              <div class="col-6 col-md-3"><div class="la-stat-card green text-center"><div class="stat-value" id="resTotalRepayment">—</div><div class="stat-label">Total Repayment</div></div></div>
+              <div class="col-6 col-md-3"><div class="la-stat-card navy text-center"><div class="stat-value" id="resInterestPct">—</div><div class="stat-label">Interest %</div></div></div>
+            </div>
+          </div>
+          <div class="la-card" id="amortCard" style="display:none">
+            <div class="la-card-header">📋 Amortisation Schedule <span class="small fw-normal text-muted">(first 12 months)</span></div>
+            <div class="table-responsive">
+              <table class="lw-table amort-table">
+                <thead><tr><th>Month</th><th>Opening Balance</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Closing Balance</th></tr></thead>
+                <tbody id="amortBody"></tbody>
+              </table>
+            </div>
+            <button class="btn btn-la-outline btn-sm mt-3" id="showAllAmort" style="display:none">Show All Months</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="la-footer text-center"><div class="container"><p class="mb-0 small">LoanWise AI — EMI values are estimates. Actual EMI may vary by lender.</p></div></footer>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/emi.js"></script>
+<script>$(function(){ initEmiCalculatorPage(); });</script>
+</body>
+</html>

@@ -151,26 +151,33 @@
 $(function(){
   renderNavbar("home");
   // Check backend connectivity on landing page
-  fetch("http://127.0.0.1:8000/api/health")
+  const apiUrl = (typeof API_BASE_URL !== "undefined" ? API_BASE_URL : (window._LOANWISE_API_URL || "https://loanwise-ai-hem0.onrender.com"));
+  fetch(apiUrl + "/api/health")
     .then(r => r.json())
     .then(data => {
       const bar = document.getElementById("serverStatusBar");
       const msg = document.getElementById("serverStatusMsg");
-      if (data.status === "ok") {
-        // Server is fine — don't show the bar at all
-      } else {
+      if (data.status === "ok" && data.mongodb === "connected") {
+        // Server and database are fully operational
+        bar.style.display = "none";
+      } else if (data.status === "ok" || data.status === "degraded") {
         bar.style.display = "block";
         bar.style.background = "#FEF3C7";
-        msg.innerHTML = "⚠️ Database connection issue — some features may be unavailable.";
+        msg.innerHTML = "⚠️ Backend online · Database connecting/reconnecting. Core features are active.";
       }
     })
     .catch(() => {
       const bar = document.getElementById("serverStatusBar");
       const msg = document.getElementById("serverStatusMsg");
       bar.style.display = "block";
-      bar.style.background = "#FEE2E2";
-      bar.style.borderColor = "#FCA5A5";
-      msg.innerHTML = "🔴 Backend server not running. Please run <strong>START_LOANWISE.bat</strong> first, then refresh this page.";
+      bar.style.background = "#FEF3C7";
+      bar.style.borderColor = "#FCD34D";
+      const isLocal = apiUrl.includes("localhost") || apiUrl.includes("127.0.0.1");
+      if (isLocal) {
+        msg.innerHTML = "🔴 Backend server not running. Please run <strong>START_LOANWISE.bat</strong> and refresh.";
+      } else {
+        msg.innerHTML = "🔄 Cloud backend is waking up (Render free tier sleeps when idle). Please wait a moment and refresh.";
+      }
     });
 });
 </script>

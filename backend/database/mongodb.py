@@ -16,18 +16,47 @@ _db     = None
 
 
 def _get_client():
-    global _client, _db
+    global _client, _db, IS_ATLAS, _conn_label
+    if _client is not None:
+        try:
+            _client.admin.command("ping")
+            return _client, _db
+        except Exception:
+            _client = None
+
     if _client is None:
-        kwargs = {"serverSelectionTimeoutMS": 20000}
-        if IS_ATLAS:
+        kwargs = {"serverSelectionTimeoutMS": 4000}
+        if "mongodb+srv" in MONGODB_URI:
             kwargs.update({
                 "tls": True,
                 "tlsAllowInvalidCertificates": True,
                 "retryWrites": True,
                 "w": "majority",
             })
-        _client = MongoClient(MONGODB_URI, **kwargs)
-        _db     = _client[DATABASE_NAME]
+        try:
+            c = MongoClient(MONGODB_URI, **kwargs)
+            c.admin.command("ping")
+            _client = c
+            _db = _client[DATABASE_NAME]
+            IS_ATLAS = "mongodb+srv" in MONGODB_URI
+            _conn_label = "MongoDB Atlas" if IS_ATLAS else "Local MongoDB"
+            return _client, _db
+        except Exception as exc:
+            # If primary connection failed (e.g. Atlas IP blocked), check local MongoDB Compass
+            try:
+                local_uri = "mongodb://127.0.0.1:27017"
+                c_local = MongoClient(local_uri, serverSelectionTimeoutMS=2000)
+                c_local.admin.command("ping")
+                _client = c_local
+                _db = _client[DATABASE_NAME]
+                IS_ATLAS = False
+                _conn_label = "Local MongoDB (Compass)"
+                print("[LoanWise AI] Connected to local MongoDB Compass.")
+                return _client, _db
+            except Exception:
+                pass
+            _client = MongoClient(MONGODB_URI, **kwargs)
+            _db = _client[DATABASE_NAME]
     return _client, _db
 
 

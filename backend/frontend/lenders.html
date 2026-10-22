@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lenders Directory — LoanWise AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="lw-layout">
+  <div id="sidebarOverlay" class="lw-sidebar-overlay"></div>
+  <aside id="lwSidebar" class="lw-sidebar"></aside>
+  <div class="lw-main">
+    <header id="lwTopbar" class="lw-topbar"></header>
+    <main class="lw-page-content">
+      <div class="lw-breadcrumb"><a href="dashboard.html">Dashboard</a> / Lenders</div>
+      <h1 class="lw-page-title">Indian Lender Directory</h1>
+      <p class="lw-page-subtitle">Verified Indian banks and NBFCs in the catalogue. This is a neutral listing — no lender is ranked or recommended above others.</p>
+
+      <div class="mb-3">
+        <div class="source-ribbon">✅ Verified Lender Catalogue — Product information sourced from official lender pages</div>
+      </div>
+
+      <div id="lenderAlert"></div>
+      <div class="row g-3" id="lendersGrid">
+        <div class="col-12 text-center py-5 text-muted">Loading lender directory...</div>
+      </div>
+    </main>
+    <footer class="la-footer text-center"><div class="container"><p class="mb-0 small">LoanWise AI — Neutral lender directory. No ranking or endorsement implied.</p></div></footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(function() {
+  initPageLayout("lenders", "Lender Directory");
+  laAjax("GET", "/api/loans/lenders")
+    .then(data => {
+      if (!data.length) {
+        $("#lendersGrid").html('<div class="col-12"><div class="empty-state"><div class="empty-icon">🏦</div><div class="empty-msg">No lenders in catalogue.</div></div></div>');
+        return;
+      }
+      let html = "";
+      data.forEach(lender => {
+        const catList = (lender.categories || []).join(", ");
+        html += `<div class="col-md-4 col-lg-3">
+          <div class="lender-card h-100">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div class="lender-name">🏦 ${escapeHtml(lender.lender_name)}</div>
+              <span class="lender-type">${escapeHtml(lender.lender_type || "Bank")}</span>
+            </div>
+            <div class="lender-products">${lender.product_count} products available</div>
+            <div class="small text-muted mt-1">📍 ${escapeHtml(lender.headquarters_city || "")}${lender.state ? ", " + lender.state : ""}</div>
+            <div class="small text-muted mt-1">Categories: ${catList || "—"}</div>
+            ${lender.official_website ? `<a href="${lender.official_website}" target="_blank" class="small text-primary-la d-block mt-1">🔗 Official Website ↗</a>` : ""}
+            <div class="mt-2"><span class="badge-verified">✅ ${escapeHtml(lender.verification_status || "Verified")}</span></div>
+            <div class="mt-3">
+              <button class="btn btn-sm btn-la-outline w-100" onclick="window.location.href='loan-search.html?lender=${encodeURIComponent(lender.lender_name)}'">View Products</button>
+            </div>
+          </div>
+        </div>`;
+      });
+      $("#lendersGrid").html(html);
+    })
+    .catch(err => showAlert("lenderAlert", err.message, "danger"));
+});
+</script>
+</body>
+</html>
