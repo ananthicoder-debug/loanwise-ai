@@ -5,7 +5,7 @@ services:
     region: singapore
     plan: free
     pythonVersion: "3.11.9"
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt && python ml/train_eligibility.py && python ml/train_affordability.py
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: MONGODB_URI
@@ -22,5 +22,3 @@ services:
         value: production
       - key: PYTHON_VERSION
         value: "3.11.9"
-      - key: PYTHONDONTWRITEBYTECODE
-        value: "1"
