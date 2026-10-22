@@ -10,7 +10,7 @@ GET  /api/admin/category-stats   -> products-per-category aggregation
 
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends
-from database.mongodb import collections, db
+from database.mongodb import collections
 from utils.deps import get_current_admin
 
 router = APIRouter(prefix="/api/admin", tags=["admin-datasets"])
